@@ -5,13 +5,14 @@
   "authority": "The C4 Model, Simon Brown, O'Reilly 2026, ch10 Notation. Three rulings are taken from it rather than invented: (1) C4 is notation independent and the familiar blue/grey shapes are called a misconception, not a standard, so a palette here is a choice this repo makes and must defend; (2) colour must encode a DIMENSION the reader cannot already read off the page — the chapter's own first suggestion is existing versus new, which is what `notOurs` is; (3) any scheme must carry a diagram key and must survive colour vision deficiency and black-and-white printing, which is why `greyscaleStep` exists and is checked.",
   "meaning": {
     "violet": "ours: we build it, we can change it. It lightens as you go deeper — system, then container, then component.",
-    "muted green": "not ours: a person, or a system that already exists and that we call rather than build. Outside the ramp, and darker than all of it, so it stays distinct with the colour removed.",
+    "muted green": "not ours: a person, or a system that already exists and that we call rather than build. Outside the ramp, and darker than all of it, so it stays distinct with the colour removed. LIGHTENED 2026-09-05 from #2b3a33 to #31423a: the old green was 1.58:1 against the canvas the renderer actually paints (#111111), so a not-ours box was a faint outline rather than a shape. #31423a reads 1.77 there and still holds the greyscale ladder at 1.38 against violet, where a lighter green collapses into it.",
     "shape": "a store is a cylinder, a queue or topic is a pipe, and a person is a person. Shape carries what colour must not be asked to carry twice.",
     "line": "a solid line is a call that blocks; a dashed line is a message that does not. The book offers both conventions in ch10 and requires neither, so this file is where the choice is made.",
     "frame": "a DEPLOYMENT NODE is where things run and it CONTAINS them, so it is drawn as a frame: canvas fill, a light stroke, no hue claim, because ownership is not what a boundary says. An INFRASTRUCTURE NODE is not a frame — it holds nothing. Measured 2026-09-05: it had been given the frame treatment by analogy with the line above, and the detection worker then rendered as a 450x300 empty-looking box the operator picked out by hand. A leaf takes the element treatment.",
     "delivery": "the STROKE says whether we are proposing it, and the DESCRIPTION carries the word. Neon pink is a Proposal — a component the harness has no seat for; amber is Modified — a rule in an extension point that already ships empty. Hue is NOT used for this, because ADR 0002 spent it on ownership. Measured on the canvas: pink 5.00:1, amber 9.06:1, and their greyscale lightness is 0.278 against 0.545, so the two stay apart with the colour removed.",
     "accounting": "A style row that no view here draws must say ON THE ROW who it is for. The palette is seeded outward, so a row can exist for somebody else’s model; what is refused is a row nobody can account for. The field is `for`, which is the word machinery.json already uses for the same question.",
-    "instance": "an instance makes NO hue claim, for the same reason a frame does not: it says WHERE something runs, not whether we own it. Measured 2026-09-05 — styling \"Software System Instance\" violet would have painted the attacker listener, the OTel collector, the network controls and the attacker agent as OURS, and \"Container Instance\" violet would have claimed Slack's own containers. The renderer already resolves an instance from the thing it instances, so the row exists to EXPLAIN the tag on the key and nothing more."
+    "instance": "an instance makes NO hue claim, for the same reason a frame does not: it says WHERE something runs, not whether we own it. Measured 2026-09-05 — styling \"Software System Instance\" violet would have painted the attacker listener, the OTel collector, the network controls and the attacker agent as OURS, and \"Container Instance\" violet would have claimed Slack's own containers. The renderer already resolves an instance from the thing it instances, so the row exists to EXPLAIN the tag on the key and nothing more.",
+    "ladder": "THE WHOLE RAMP WAS LIFTED 2026-09-05, not one colour. The canvas the renderer actually paints is #111111, far darker than the #1F2226 this file had assumed, so every fill was closer to its background than anyone had measured. Fixing only the green put it between two floors with 0.001 of luminance to spare — it passed by 0.02 and would have broken on the next change. The ramp now clears both with margin: green 1.80 against the canvas (floor 1.6), and steps of 1.39, 1.41 and 1.81 between the rungs (floor 1.3). White text reads 10.49, 7.52 and 5.35 on them."
   },
   "canvas": "#1F2226",
   "ramp": [
@@ -38,22 +39,22 @@
     {
       "tag": "Person",
       "shape": "Person",
-      "background": "#2b3a33",
+      "background": "#32433b",
       "stroke": "#6fa588"
     },
     {
       "tag": "Existing System",
-      "background": "#2b3a33",
+      "background": "#32433b",
       "stroke": "#6fa588"
     },
     {
       "tag": "Software System",
-      "background": "#3f4383",
+      "background": "#494d97",
       "stroke": "#a5a9f0"
     },
     {
       "tag": "Container",
-      "background": "#5a5fa6",
+      "background": "#5f64af",
       "stroke": "#b9bdf5"
     },
     {
@@ -65,13 +66,13 @@
     {
       "tag": "Data Store",
       "shape": "Cylinder",
-      "background": "#5a5fa6",
+      "background": "#5f64af",
       "stroke": "#b9bdf5"
     },
     {
       "tag": "Channel",
       "shape": "Pipe",
-      "background": "#5a5fa6",
+      "background": "#5f64af",
       "stroke": "#b9bdf5",
       "for": "a consumer model with message queues or topics — this repo draws them in payments"
     },
@@ -83,7 +84,7 @@
     },
     {
       "tag": "Infrastructure Node",
-      "background": "#5a5fa6",
+      "background": "#5f64af",
       "stroke": "#b9bdf5",
       "color": "#ffffff",
       "for": "a thing that RUNS and holds nothing — a worker, a load balancer. It is a leaf, not a boundary, so it takes the element treatment and makes an ownership claim like any other element; a node we do not own says so by carrying Existing System."
@@ -132,10 +133,10 @@
     "Modified": "modified — hover for details"
   },
   "hues": {
-    "#3f4383": "ours",
-    "#5a5fa6": "ours",
+    "#494d97": "ours",
+    "#5f64af": "ours",
     "#8b92ce": "ours",
-    "#2b3a33": "not ours",
+    "#32433b": "not ours",
     "#1f2226": "no claim"
   },
   "_hues_why": "What each fill CLAIMS, not what it looks like. checks/palette-claim.mjs refuses a fill that is not here, and refuses an ownership fill on a row listed in noClaim.",

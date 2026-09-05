@@ -1,4 +1,11 @@
 node_modules/
 .DS_Store
+
+# Derived by the exporter — reproduced by `structurizr-cli export`, never reviewed as text.
 architecture/*/site/
 architecture/svg/
+
+# Decoy keyring — canary values only, kept local (not pushed) so GitHub's
+# secret scanner doesn't flag the token-shaped patterns.
+agent-credentials.env
+.env

@@ -1,6 +1,6 @@
 {
   "configuration" : { },
-  "description" : "Blue-team observability and governance over an AI agent's Slack MCP surface.",
+  "description" : "Blocks silent credential exfiltration.",
   "documentation" : { },
   "id" : 0,
   "model" : {
@@ -478,7 +478,7 @@
       "tags" : "Element,Software System"
     } ]
   },
-  "name" : "MCP-Guard",
+  "name" : "No-Leak-MCP",
   "properties" : {
     "structurizr.inspection.error" : "17",
     "structurizr.inspection.info" : "0",

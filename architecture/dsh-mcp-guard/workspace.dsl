@@ -25,7 +25,7 @@
  * in order, and nothing in the export knows what the source narrative contained. A step-order rule
  * catches a renumbering; only a reader catches an omission.
  */
-workspace "MCP-Guard" "Blue-team observability and governance over an AI agent's Slack MCP surface." {
+workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
 
     model {
         engA = person "Engineer A" "The rival. Owns none of the harness, and hands a personal agent an open-ended goal."
@@ -235,6 +235,8 @@ workspace "MCP-Guard" "Blue-team observability and governance over an AI agent's
             description "START AT 1. From a durable record to an indicator a firewall can act on — and step 2 is the event to instrument: the invariant's read-then-post window."
         }
 
+        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
+           Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
            Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.

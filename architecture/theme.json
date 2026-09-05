@@ -115,5 +115,10 @@
   "deliveryLabels": {
     "Proposal": "proposed — hover for details",
     "Modified": "modified — hover for details"
-  }
+  },
+  "offered": [
+    "Channel",
+    "Asynchronous"
+  ],
+  "_offered_why": "Rows this palette provides for a consumer model to use, which THIS repo may not draw. The theme is seeded outward by bin/drawing-office.mjs, so a style can exist for somebody else's queues; checks/diagram-key.mjs exempts a declared vocabulary from its unused-row rule and still fires on an undeclared row nobody draws."
 }

@@ -1,0 +1,334 @@
+<title>dsh-mcp-guard Dynamic View</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+:root{
+  --paper:#FAF8F3; --surface:#FFFFFF; --ext:#EEEAE0;
+  --ink:#1A1815; --ink-2:#59524A; --ink-3:#8A8175;
+  --rule:#C6BFB1; --rule-soft:#E3DDD1;
+  --accent:#4A3FB0; --accent-soft:#EDEBFA;
+  --danger:#A02C25; --danger-soft:#F7E9E7;
+  --sans:'Archivo Narrow','Arial Narrow',Arial,sans-serif;
+  --serif:'Newsreader',Georgia,'Times New Roman',serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#131209; --surface:#1D1B15; --ext:#26231B;
+  --ink:#EFEBE0; --ink-2:#B0A897; --ink-3:#847C6D;
+  --rule:#4E4839; --rule-soft:#332F26;
+  --accent:#ABA2F2; --accent-soft:#262149;
+  --danger:#E58A80; --danger-soft:#3A211E;
+}}
+:root[data-theme="dark"]{
+  --paper:#131209; --surface:#1D1B15; --ext:#26231B;
+  --ink:#EFEBE0; --ink-2:#B0A897; --ink-3:#847C6D;
+  --rule:#4E4839; --rule-soft:#332F26;
+  --accent:#ABA2F2; --accent-soft:#262149;
+  --danger:#E58A80; --danger-soft:#3A211E;
+}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--serif);margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding:56px 28px 96px;display:flex;flex-direction:column;gap:44px}
+header{display:flex;flex-direction:column;gap:14px;max-width:64ch}
+.eyebrow{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+h1{font-family:var(--sans);font-weight:700;font-size:clamp(30px,4.4vw,46px);line-height:1.06;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.standfirst{font-size:19px;line-height:1.65;color:var(--ink-2);margin:0;font-weight:300}
+.standfirst strong{color:var(--ink);font-weight:500}
+
+.plate{border:1px solid var(--rule);background:var(--surface);padding:0}
+.plate-scroll{overflow-x:auto;padding:22px 22px 6px}
+.plate-svg{display:block;width:2470px;max-width:none;height:auto}
+.plate figcaption{border-top:1px solid var(--rule-soft);padding:14px 22px 16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+.fig{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.figtxt{font-size:15px;color:var(--ink-2);font-style:italic}
+.hint{font-family:var(--sans);font-size:13px;color:var(--ink-3);letter-spacing:.02em}
+
+h2{font-family:var(--sans);font-weight:600;font-size:24px;letter-spacing:-.005em;margin:0 0 4px}
+section{display:flex;flex-direction:column;gap:18px}
+.lede{font-size:17px;line-height:1.6;color:var(--ink-2);margin:0;max-width:66ch;font-weight:300}
+
+ol.ledger{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:0 34px}
+ol.ledger li{display:grid;grid-template-columns:30px 1fr;gap:0 10px;padding:11px 0;border-bottom:1px solid var(--rule-soft);align-items:baseline}
+ol.ledger .num{font-family:var(--mono);font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+ol.ledger .txt{font-size:16px;line-height:1.45}
+ol.ledger .txt em{font-family:var(--mono);font-style:normal;font-size:12.5px;color:var(--ink-3)}
+ol.ledger .own{grid-column:2;font-family:var(--mono);font-size:11.5px;color:var(--ink-3);margin-top:3px;word-break:break-word}
+ol.ledger li.hi .num,ol.ledger li.hi .txt{color:var(--accent)}
+ol.ledger li.deny .num,ol.ledger li.deny .txt{color:var(--danger)}
+
+.tw{overflow-x:auto;border:1px solid var(--rule-soft)}
+table{border-collapse:collapse;width:100%;min-width:660px;background:var(--surface)}
+th{font-family:var(--sans);font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:12px 16px;border-bottom:1px solid var(--rule)}
+td{padding:12px 16px;border-bottom:1px solid var(--rule-soft);font-size:15.5px;line-height:1.5;vertical-align:top;color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+td code{font-family:var(--mono);font-size:12.5px;color:var(--ink);white-space:nowrap}
+td.lane{font-family:var(--sans);font-size:14px;color:var(--ink-3);white-space:nowrap}
+
+.closer{border-left:3px solid var(--accent);padding:4px 0 4px 20px;max-width:62ch}
+.closer p{margin:0;font-size:18px;line-height:1.6;font-style:italic;color:var(--ink)}
+
+/* SVG lettering */
+.plate-svg text{font-family:var(--sans);fill:var(--ink)}
+.bd-t{font-size:19px;font-weight:700;letter-spacing:.01em}
+.bd-t2{font-size:17px;font-weight:600;text-anchor:middle}
+.bd-k{font-size:13px;fill:var(--ink-3);text-anchor:middle}
+.pb-t{font-size:15.5px;font-weight:600}
+.pb-k{font-size:11.5px;fill:var(--ink-3)}
+.pb-p{font-family:var(--mono);font-size:10px;fill:var(--ink-2)}
+.pb-t.acc,.pb-p.acc{fill:var(--accent)}
+.ar{font-size:13.5px;font-weight:500}
+.ar.acc{fill:var(--accent)}
+.ar.dn{fill:var(--danger)}
+.ar2{font-family:var(--mono);font-size:11px;fill:var(--ink-3);text-anchor:middle}
+.ab{font-family:var(--sans);font-size:15px;font-weight:700;fill:var(--paper)}
+.nt-t{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;fill:var(--ink-3)}
+.nt{font-size:14px;fill:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">C4 dynamic view · sequence style</div>
+  <h1>From a Slack read to a firewall rule</h1>
+  <p class="standfirst">Fifteen DeepSeek Harness plugins carry one poisoned message from the MCP bridge to an enforceable indicator. <strong>Point A</strong> is the tool result arriving in the session. <strong>Point B</strong> is the moment a firewall, an EDR agent or a secret vault can act on it. Everything in indigo is new; everything else already ships in <code style="font-family:var(--mono);font-size:15px">dsh 0.1.1-rc.2</code>.</p>
+</header>
+
+<figure class="plate">
+  <div class="plate-scroll">
+<svg class="plate-svg" viewBox="0 0 2470 1660" role="img" aria-labelledby="plateTitle plateDesc" xmlns="http://www.w3.org/2000/svg">
+<title id="plateTitle">C4 dynamic view of the dsh-mcp-guard exfiltration chain</title>
+<desc id="plateDesc">A sequence-style C4 dynamic diagram with twelve participants. A Slack message enters through the MCP bridge, is appended to the durable session log, is scored by the injection scorer, and a later post attempt carrying the secret is denied by the compose guard. The chain invariant reads the window and reports, the OTLP exporter emits an indicator record across the harness boundary to an OpenTelemetry collector, which routes it to network and endpoint controls.</desc>
+<defs>
+<marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="context-stroke"/></marker>
+</defs>
+<rect x="205" y="30" width="1850" height="1555" rx="14" fill="none" stroke="var(--rule)" stroke-width="2" stroke-dasharray="12 7"/>
+<text class="bd-t" x="1130" y="60" text-anchor="middle">DeepSeek Harness</text>
+<text class="bd-k" x="1130" y="80" text-anchor="middle">[Software system]</text>
+<rect x="225" y="96" width="780" height="1380" rx="10" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text class="bd-t2" x="615" y="124">Agent runtime</text>
+<text class="bd-k" x="615" y="144">[Container: dsh-agent-loop]</text>
+<rect x="1025" y="96" width="400" height="1380" rx="10" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text class="bd-t2" x="1225" y="124">Session store</text>
+<text class="bd-k" x="1225" y="144">[Container: event-sourced JSONL]</text>
+<rect x="1445" y="96" width="590" height="1380" rx="10" fill="none" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="3 5"/>
+<text class="bd-t2" x="1740" y="124">Observability</text>
+<text class="bd-k" x="1740" y="144">[Container: telemetry seam]</text>
+<line x1="110" y1="236" x2="110" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="330" y1="236" x2="330" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="520" y1="236" x2="520" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="710" y1="236" x2="710" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="900" y1="236" x2="900" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="1130" y1="236" x2="1130" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="1320" y1="236" x2="1320" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="1550" y1="236" x2="1550" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="1740" y1="236" x2="1740" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="1930" y1="236" x2="1930" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="2160" y1="236" x2="2160" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<line x1="2350" y1="236" x2="2350" y2="1380" stroke="var(--rule)" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="25" y="160" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="110" y="184" text-anchor="middle">Slack workspace</text>
+<text class="pb-k" x="110" y="204" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="110" y="223" text-anchor="middle">external</text>
+<rect x="25" y="1380" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="110" y="1404" text-anchor="middle">Slack workspace</text>
+<text class="pb-k" x="110" y="1424" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="110" y="1443" text-anchor="middle">external</text>
+<rect x="245" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="330" y="184" text-anchor="middle">MCP bridge</text>
+<text class="pb-k" x="330" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="330" y="223" text-anchor="middle">dsh-mcp-client</text>
+<rect x="245" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="330" y="1404" text-anchor="middle">MCP bridge</text>
+<text class="pb-k" x="330" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="330" y="1443" text-anchor="middle">dsh-mcp-client</text>
+<rect x="435" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="520" y="184" text-anchor="middle">Agent loop</text>
+<text class="pb-k" x="520" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="520" y="223" text-anchor="middle">dsh-agent-loop</text>
+<rect x="435" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="520" y="1404" text-anchor="middle">Agent loop</text>
+<text class="pb-k" x="520" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="520" y="1443" text-anchor="middle">dsh-agent-loop</text>
+<rect x="625" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="710" y="184" text-anchor="middle">Tool pipeline</text>
+<text class="pb-k" x="710" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="710" y="223" text-anchor="middle">dsh-tools</text>
+<rect x="625" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="710" y="1404" text-anchor="middle">Tool pipeline</text>
+<text class="pb-k" x="710" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="710" y="1443" text-anchor="middle">dsh-tools</text>
+<rect x="815" y="160" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="900" y="184" text-anchor="middle">Compose guard</text>
+<text class="pb-k" x="900" y="204" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="900" y="223" text-anchor="middle">dsh-mcp-guard</text>
+<rect x="815" y="1380" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="900" y="1404" text-anchor="middle">Compose guard</text>
+<text class="pb-k" x="900" y="1424" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="900" y="1443" text-anchor="middle">dsh-mcp-guard</text>
+<rect x="1045" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1130" y="184" text-anchor="middle">Session log</text>
+<text class="pb-k" x="1130" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1130" y="223" text-anchor="middle">dsh-session</text>
+<rect x="1045" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1130" y="1404" text-anchor="middle">Session log</text>
+<text class="pb-k" x="1130" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1130" y="1443" text-anchor="middle">dsh-session</text>
+<rect x="1235" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1320" y="184" text-anchor="middle">Session reads</text>
+<text class="pb-k" x="1320" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1320" y="223" text-anchor="middle">dsh-session-query</text>
+<rect x="1235" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1320" y="1404" text-anchor="middle">Session reads</text>
+<text class="pb-k" x="1320" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1320" y="1443" text-anchor="middle">dsh-session-query</text>
+<rect x="1465" y="160" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="1550" y="184" text-anchor="middle">Injection scorer</text>
+<text class="pb-k" x="1550" y="204" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="1550" y="223" text-anchor="middle">dsh-session-telemetry</text>
+<rect x="1465" y="1380" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="1550" y="1404" text-anchor="middle">Injection scorer</text>
+<text class="pb-k" x="1550" y="1424" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="1550" y="1443" text-anchor="middle">dsh-session-telemetry</text>
+<rect x="1655" y="160" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="1740" y="184" text-anchor="middle">Chain invariant</text>
+<text class="pb-k" x="1740" y="204" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="1740" y="223" text-anchor="middle">dsh-invariants</text>
+<rect x="1655" y="1380" width="170" height="76" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+<text class="pb-t acc" x="1740" y="1404" text-anchor="middle">Chain invariant</text>
+<text class="pb-k" x="1740" y="1424" text-anchor="middle">[Component: new]</text>
+<text class="pb-p acc" x="1740" y="1443" text-anchor="middle">dsh-invariants</text>
+<rect x="1845" y="160" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1930" y="184" text-anchor="middle">OTLP exporter</text>
+<text class="pb-k" x="1930" y="204" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1930" y="223" text-anchor="middle">dsh-session-telemetry-otel</text>
+<rect x="1845" y="1380" width="170" height="76" fill="var(--surface)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="1930" y="1404" text-anchor="middle">OTLP exporter</text>
+<text class="pb-k" x="1930" y="1424" text-anchor="middle">[Component]</text>
+<text class="pb-p" x="1930" y="1443" text-anchor="middle">dsh-session-telemetry-otel</text>
+<rect x="2075" y="160" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="2160" y="184" text-anchor="middle">OTel collector</text>
+<text class="pb-k" x="2160" y="204" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="2160" y="223" text-anchor="middle">external</text>
+<rect x="2075" y="1380" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="2160" y="1404" text-anchor="middle">OTel collector</text>
+<text class="pb-k" x="2160" y="1424" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="2160" y="1443" text-anchor="middle">external</text>
+<rect x="2265" y="160" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="2350" y="184" text-anchor="middle">Network controls</text>
+<text class="pb-k" x="2350" y="204" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="2350" y="223" text-anchor="middle">firewall / EDR / vault</text>
+<rect x="2265" y="1380" width="170" height="76" fill="var(--ext)" stroke="var(--ink)" stroke-width="1.6"/>
+<text class="pb-t" x="2350" y="1404" text-anchor="middle">Network controls</text>
+<text class="pb-k" x="2350" y="1424" text-anchor="middle">[Software system]</text>
+<text class="pb-p" x="2350" y="1443" text-anchor="middle">firewall / EDR / vault</text>
+<line x1="110" y1="300" x2="324" y2="300" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="220" y="260" text-anchor="middle">1: Returns the Slack message content to</text>
+<text class="ar2" x="220" y="278" text-anchor="middle">[MCP/stdio]</text>
+<line x1="330" y1="368" x2="514" y2="368" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="425" y="346" text-anchor="middle">2: Hands the tool result to</text>
+<line x1="520" y1="436" x2="1124" y2="436" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="825" y="396" text-anchor="middle">3: Appends tool/result to</text>
+<text class="ar2" x="825" y="414" text-anchor="middle">[durable event]</text>
+<line x1="1130" y1="504" x2="1314" y2="504" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="1225" y="482" text-anchor="middle">4: Projects and deep-copies the record for</text>
+<line x1="1320" y1="572" x2="1544" y2="572" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar acc" x="1435" y="532" text-anchor="middle">5: Hands the redacted copy to</text>
+<text class="ar2" x="1435" y="550" text-anchor="middle">[sessionTelemetry/record]</text>
+<line x1="520" y1="640" x2="704" y2="640" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="615" y="618" text-anchor="middle">6: Requests slack post_message through</text>
+<path d="M 710 696 L 784 696 L 784 718 L 718 718" fill="none" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="798" y="700">7: Finds no approval policy that matches</text>
+<text class="ar2" x="798" y="718" text-anchor="start">[dsh-user-approval]</text>
+<line x1="710" y1="776" x2="894" y2="776" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="805" y="736" text-anchor="middle">8: Runs the monotonic guard in</text>
+<text class="ar2" x="805" y="754" text-anchor="middle">[ctx.tools.guard]</text>
+<line x1="900" y1="844" x2="716" y2="844" stroke="var(--danger)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar dn" x="805" y="822" text-anchor="middle">9: Denies the url carrying the tagged secret to</text>
+<line x1="710" y1="912" x2="1124" y2="912" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="920" y="890" text-anchor="middle">10: Records the denial in</text>
+<line x1="1740" y1="980" x2="1326" y2="980" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar acc" x="1530" y="958" text-anchor="middle">11: Reads the read-then-post window from</text>
+<line x1="1740" y1="1048" x2="1924" y2="1048" stroke="var(--accent)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar acc" x="1835" y="1026" text-anchor="middle">12: Fails the chain invariant and reports to</text>
+<line x1="1550" y1="1116" x2="1924" y2="1116" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="1740" y="1094" text-anchor="middle">13: Adds the injection score to</text>
+<line x1="1930" y1="1184" x2="2154" y2="1184" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="2045" y="1144" text-anchor="middle">14: Emits the indicator record to</text>
+<text class="ar2" x="2045" y="1162" text-anchor="middle">[OTLP/HTTP]</text>
+<line x1="2160" y1="1252" x2="2344" y2="1252" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="2255" y="1230" text-anchor="middle">15: Routes the host and canary hash to</text>
+<line x1="1320" y1="1320" x2="2344" y2="1320" stroke="var(--ink)" stroke-width="1.8" stroke-dasharray="9 5" marker-end="url(#ah)"/>
+<text class="ar" x="1835" y="1280" text-anchor="middle">16: Exports the evidence bundle to</text>
+<text class="ar2" x="1835" y="1298" text-anchor="middle">[download]</text>
+<circle cx="110" cy="260" r="15" fill="var(--ink)"/><text class="ab" x="110" y="266" text-anchor="middle">A</text>
+<circle cx="2350" cy="1206" r="15" fill="var(--ink)"/><text class="ab" x="2350" y="1212" text-anchor="middle">B</text>
+<rect x="227" y="1495" width="1806" height="66" fill="none" stroke="var(--rule)" stroke-width="1.5"/>
+<text class="nt-t" x="247" y="1521">In the system, not in this path</text>
+<text class="nt" x="247" y="1544">dsh-sandbox-policy confines file effects only — never reads or network.   dsh-tool-web is the one URL-taking tool and ships no domain policy.</text>
+</svg>
+  </div>
+  <figcaption>
+    <span class="fig">Figure 1</span>
+    <span class="figtxt">Dynamic view — DeepSeek Harness — silent egress, point A to point B</span>
+    <span class="hint">Scroll the plate sideways to follow the full chain.</span>
+  </figcaption>
+</figure>
+
+<section>
+  <h2>The sixteen messages</h2>
+  <p class="lede">Steps 1–5 are ingestion and scoring. Steps 6–10 are the post attempt and the denial. Steps 11–13 assemble the indicator. Steps 14–16 cross the harness boundary into controls that can actually stop a packet.</p>
+  <ol class="ledger">
+<li><span class="num">1</span><span class="txt">Returns the Slack message content to <em>[MCP/stdio]</em></span><span class="own">Slack workspace → dsh-mcp-client</span></li>
+<li><span class="num">2</span><span class="txt">Hands the tool result to</span><span class="own">dsh-mcp-client → dsh-agent-loop</span></li>
+<li><span class="num">3</span><span class="txt">Appends tool/result to <em>[durable event]</em></span><span class="own">dsh-agent-loop → dsh-session</span></li>
+<li><span class="num">4</span><span class="txt">Projects and deep-copies the record for</span><span class="own">dsh-session → dsh-session-query</span></li>
+<li class="hi"><span class="num">5</span><span class="txt">Hands the redacted copy to <em>[sessionTelemetry/record]</em></span><span class="own">dsh-session-query → dsh-session-telemetry</span></li>
+<li><span class="num">6</span><span class="txt">Requests slack post_message through</span><span class="own">dsh-agent-loop → dsh-tools</span></li>
+<li><span class="num">7</span><span class="txt">Finds no approval policy that matches <em>[dsh-user-approval]</em></span><span class="own">dsh-user-approval · dsh-permission-presets</span></li>
+<li><span class="num">8</span><span class="txt">Runs the monotonic guard in <em>[ctx.tools.guard]</em></span><span class="own">dsh-tools → dsh-mcp-guard</span></li>
+<li class="deny"><span class="num">9</span><span class="txt">Denies the url carrying the tagged secret to</span><span class="own">dsh-mcp-guard → dsh-tools</span></li>
+<li><span class="num">10</span><span class="txt">Records the denial in</span><span class="own">dsh-tools → dsh-session</span></li>
+<li class="hi"><span class="num">11</span><span class="txt">Reads the read-then-post window from</span><span class="own">dsh-invariants → dsh-session-query</span></li>
+<li class="hi"><span class="num">12</span><span class="txt">Fails the chain invariant and reports to</span><span class="own">dsh-invariants → dsh-session-telemetry-otel</span></li>
+<li><span class="num">13</span><span class="txt">Adds the injection score to</span><span class="own">dsh-session-telemetry → dsh-session-telemetry-otel</span></li>
+<li><span class="num">14</span><span class="txt">Emits the indicator record to <em>[OTLP/HTTP]</em></span><span class="own">dsh-session-telemetry-otel → OTel collector</span></li>
+<li><span class="num">15</span><span class="txt">Routes the host and canary hash to</span><span class="own">OTel collector → firewall / EDR / vault</span></li>
+<li><span class="num">16</span><span class="txt">Exports the evidence bundle to <em>[download]</em></span><span class="own">dsh-session-query → firewall / EDR / vault</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>The roster</h2>
+  <p class="lede">Every plugin named in the chain, the lane it occupies, and the job it does here. Three are new; the rest are existing parts asked to hold an opinion for the first time.</p>
+  <div class="tw">
+  <table>
+    <thead><tr><th>Plugin</th><th>Lane</th><th>Job in this flow</th></tr></thead>
+    <tbody>
+<tr><td><code>dsh-mcp-client</code></td><td class="lane">MCP bridge</td><td>Point A. Returns the Slack message as an ordinary tool result — with no provenance tag.</td></tr>
+<tr><td><code>dsh-agent-loop</code></td><td class="lane">Agent runtime</td><td>Carries the result into model context and drives the post attempt.</td></tr>
+<tr><td><code>dsh-tools</code></td><td class="lane">Tool pipeline</td><td>Owns the pre-execute gate and the monotonic guard slot. The kill point sits here.</td></tr>
+<tr><td><code>dsh-user-approval</code></td><td class="lane">Tool pipeline</td><td>Fail-closed human gate. Nothing asks it about tool arguments, so nothing is asked.</td></tr>
+<tr><td><code>dsh-permission-presets</code></td><td class="lane">Tool pipeline</td><td>Bundles sandbox mode with approval policy. Governs shell and files, not arguments.</td></tr>
+<tr><td><code>dsh-mcp-guard</code></td><td class="lane">Compose guard</td><td>New. Denies a call whose URL carries a tagged secret. Cannot be reversed downstream.</td></tr>
+<tr><td><code>dsh-session</code></td><td class="lane">Session log</td><td>Event-sourced store. Every step in this diagram is already written down here.</td></tr>
+<tr><td><code>dsh-session-persistence-jsonl</code></td><td class="lane">Session log</td><td>Writes the canonical log to disk as JSONL.</td></tr>
+<tr><td><code>dsh-session-projection</code></td><td class="lane">Session reads</td><td>Builds the record shape telemetry deep-copies before redaction.</td></tr>
+<tr><td><code>dsh-session-query</code></td><td class="lane">Session reads</td><td>Serves the read-then-post window the chain invariant tests.</td></tr>
+<tr><td><code>dsh-session-log-export</code></td><td class="lane">Session reads</td><td>Produces the evidence bundle joined against the listener hit.</td></tr>
+<tr><td><code>dsh-session-telemetry</code></td><td class="lane">Injection scorer</td><td>New rule in an empty redact waterfall. First signal in the chain.</td></tr>
+<tr><td><code>dsh-invariants</code></td><td class="lane">Chain invariant</td><td>New companion. Asserts no secret reaches a URL without a human in the window.</td></tr>
+<tr><td><code>dsh-session-telemetry-otel</code></td><td class="lane">OTLP exporter</td><td>The only plugin that crosses the boundary. Turns a harness signal into an indicator.</td></tr>
+<tr><td><code>dsh-sandbox-policy</code></td><td class="lane">not in this path</td><td>Confines writes to the workspace. Not reads, not network — which is why B is external.</td></tr>
+<tr><td><code>dsh-tool-web</code></td><td class="lane">not in this path</td><td>The one URL-taking tool. No domain allowlist, never asks approval.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Where the boundary really sits</h2>
+  <p class="lede">The harness never blocks a packet, and nothing in it can. <code style="font-family:var(--mono);font-size:14px">dsh-sandbox-policy</code> confines writes to the workspace — not reads, not network — and the fetch that completes the theft is made by Slack's own servers, on infrastructure no local control can see. So the deliverable is not a network control. It is a signal precise enough that an existing network control can act on it: a destination host, a canary hash, a session id and a severity, emitted over OTLP at step 14.</p>
+  <div class="closer"><p>The harness proves intent at the API layer. The wire proves delivery. The canary hash is the join.</p></div>
+</section>
+</div>

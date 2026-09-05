@@ -2,8 +2,8 @@
   "generated": "checks/diagram-contrast.mjs --index",
   "projects": [
     {
-      "dir": "dsh-mcp-guard",
-      "name": "No-Leak-MCP",
+      "dir": "mcp-guard",
+      "name": "mcp-guard",
       "description": "Blocks silent credential exfiltration."
     }
   ]

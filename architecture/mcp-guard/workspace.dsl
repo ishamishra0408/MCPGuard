@@ -25,7 +25,7 @@
  * in order, and nothing in the export knows what the source narrative contained. A step-order rule
  * catches a renumbering; only a reader catches an omission.
  */
-workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
+workspace "mcp-guard" "Blocks silent credential exfiltration." {
 
     model {
         engA = person "Engineer A" "The rival. Owns none of the harness, and hands a personal agent an open-ended goal."
@@ -202,7 +202,7 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
            did not have. The static structure says WHAT talks to what; this says WHERE each of those
            runs, and Render appears once, as a node. */
         deploymentEnvironment "Live" {
-            deploymentNode "Engineer B laptop" "The victim's own machine. The harness and its session log never leave it." "macOS" {
+            deploymentNode "Engineer B laptop" "The victim's own machine. The harness and its session log never leave it — which is why the exfiltration has to go through something else's servers." "macOS" {
                 deploymentNode "dsh 0.1.1-rc.2" "The harness install." "Node" {
                     containerInstance run
                     containerInstance store
@@ -210,22 +210,56 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
                     containerInstance windows
                 }
             }
-            deploymentNode "Render" "The delivery plane: everything that must outlive a laptop lid closing, and recover from a dead step by rebuilding from the durable session log." "PaaS" {
-                deploymentNode "Detection worker" "Re-subscribes and rebuilds its state from the durable log rather than restarting from zero." "background worker" {
+
+            /* ENGINEER A IS A SEPARATE MACHINE AND THAT IS THE THREAT MODEL, not a detail. The
+               attacker never touches the victim's host: they post a message and wait. A deployment
+               view that put both agents in one box would draw the wrong system. */
+            deploymentNode "Engineer A laptop" "The attacker's own machine. Sets the goal, plants the message, and touches nothing else." "macOS" {
+                softwareSystemInstance attacker
+            }
+
+            deploymentNode "Render" "The delivery plane: what must outlive a laptop lid closing." "PaaS" {
+                /* TWO NODES, NOT ONE. The first draft put the collector inside a node called
+                   "Detection worker", which conflated the thing that RECEIVES OTLP with the thing
+                   that DECIDES on it — and the recovery claim is about the second one only. */
+                deploymentNode "OTLP collector" "Receives indicator records. Stateless: it forwards, it does not judge." "collector" {
                     softwareSystemInstance collector
                 }
-                deploymentNode "Attacker listener host" "Engineer A's drop. Outside the victim's host by construction — the whole point is that it is reachable from Slack's servers." "web service" {
+                /* AN INFRASTRUCTURE NODE, NOT A DEPLOYMENT NODE, and the difference is whether the
+                   box holds something the static model declares. The worker is not part of the
+                   harness and has no container to instance, so as a deploymentNode it rendered as
+                   an EMPTY box — a thing declared and holding nothing, which is the shape a reader
+                   cannot interpret. Chapter 8's infrastructureNode is exactly this case: a running
+                   piece of infrastructure that is not an instance of a modelled element. */
+                infrastructureNode "Detection worker" "Judges the stream and drives the dashboard. RECOVERS BY RE-SUBSCRIBING rather than restarting from zero: the state it needs is in the realtime store, which is a projection of the session log that remains the source of truth on the victim's laptop." "background worker"
+                deploymentNode "Attacker listener host" "Engineer A's drop. Reachable from Slack's servers by construction — that is the whole vector." "web service" {
                     softwareSystemInstance listener
                 }
             }
-            deploymentNode "Nebius" "The inference plane, shared by the victim model and the scorer." "managed inference" {
+
+            deploymentNode "Nebius" "The inference plane, shared by the victim model and the scorer so attack-success is measured on one substrate." "managed inference" {
                 softwareSystemInstance nebius
             }
-            deploymentNode "Convex" "The realtime plane. Hosted, and the dashboard subscribes to it rather than polling." "managed reactive database" {
+
+            deploymentNode "Convex" "The realtime plane. Durable enough for the worker to rebuild from, and subscribable so several people watch one run." "managed reactive database" {
                 softwareSystemInstance convex
             }
-            deploymentNode "Slack" "Not ours, and the unfurl fetch originates here rather than on the victim's host — which is the whole CVE." "SaaS" {
-                softwareSystemInstance slackWorkspace
+
+            /* SLACK'S CONTAINERS, NOT SLACK. The unfurl service is the CVE: it fetches the URL from
+               SLACK'S OWN SERVERS rather than the victim's host, so no packet leaves the laptop and
+               no egress control on that laptop can see it. Deploying the system as one opaque box
+               would hide the single fact this whole diagram exists to show. */
+            deploymentNode "Slack infrastructure" "Not ours. The half of the chain that runs on somebody else's servers." "SaaS" {
+                containerInstance slack
+                containerInstance unfurl
+            }
+
+            /* WHERE A PACKET CAN ACTUALLY BE STOPPED, and it is not on the victim's laptop for the
+               unfurl vector. Drawn so the reader can see that the guard has to deny at ASSEMBLY
+               time, inside the harness, because by the time anything reaches this node the fetch
+               has already happened somewhere else. */
+            deploymentNode "Corporate egress" "Firewall, EDR and the secret vault: the controls that can drop a packet, sitting where the victim's traffic leaves." "network" {
+                softwareSystemInstance controls
             }
         }
     }

@@ -13,7 +13,7 @@
           "id" : "66",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "1da415ca-1e08-4731-8fb6-b34e063ac653"
+            "structurizr.dsl.identifier" : "c2d22e64-4533-4125-8908-eda82516c747"
           },
           "relationships" : [ {
             "description" : "Appends the poisoned result to",
@@ -31,16 +31,16 @@
             "technology" : "durable event"
           }, {
             "description" : "Requests completions from",
-            "destinationId" : "83",
-            "id" : "84",
+            "destinationId" : "86",
+            "id" : "87",
             "linkedRelationshipId" : "56",
             "sourceId" : "66",
             "technology" : "OpenAI-compatible"
           }, {
             "description" : "Posts the unfurl link to",
-            "destinationId" : "91",
-            "id" : "93",
-            "linkedRelationshipId" : "31",
+            "destinationId" : "94",
+            "id" : "96",
+            "linkedRelationshipId" : "30",
             "sourceId" : "66",
             "technology" : "no guard mounted"
           } ],
@@ -52,7 +52,7 @@
           "id" : "67",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "792d15d1-3a09-4570-85f4-411be5ea8cf9"
+            "structurizr.dsl.identifier" : "c1647338-b17f-41af-99d4-80050ef487f9"
           },
           "relationships" : [ {
             "description" : "Hands the redacted record to",
@@ -77,7 +77,7 @@
           "id" : "70",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "2785e67e-03a9-4758-955a-2182859ac62f"
+            "structurizr.dsl.identifier" : "33aa7ec3-4a6b-41ec-a066-8d5a68fdd682"
           },
           "relationships" : [ {
             "description" : "Reads the read-then-post window from",
@@ -87,23 +87,30 @@
             "sourceId" : "70"
           }, {
             "description" : "emits indicator records to",
-            "destinationId" : "78",
-            "id" : "79",
+            "destinationId" : "80",
+            "id" : "81",
             "linkedRelationshipId" : "53",
             "sourceId" : "70",
             "technology" : "OTLP/HTTP"
           }, {
             "description" : "Scores ingested content with",
-            "destinationId" : "83",
-            "id" : "85",
+            "destinationId" : "86",
+            "id" : "88",
             "linkedRelationshipId" : "59",
             "sourceId" : "70",
             "technology" : "second model call"
           }, {
             "description" : "Streams guard decisions and the success metric to",
-            "destinationId" : "87",
-            "id" : "88",
+            "destinationId" : "90",
+            "id" : "91",
             "linkedRelationshipId" : "63",
+            "sourceId" : "70",
+            "technology" : "OTLP/HTTP"
+          }, {
+            "description" : "Emits the exfiltration indicator to",
+            "destinationId" : "102",
+            "id" : "103",
+            "linkedRelationshipId" : "43",
             "sourceId" : "70",
             "technology" : "OTLP/HTTP"
           } ],
@@ -115,7 +122,7 @@
           "id" : "73",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "8195ac2c-2897-4305-9a4d-9e3132e1d9d1"
+            "structurizr.dsl.identifier" : "c14149d1-a3ee-460e-901a-3a8a1d25c1ae"
           },
           "relationships" : [ {
             "description" : "Pushes a completed read-then-post window to",
@@ -126,8 +133,8 @@
             "technology" : "reactive subscription"
           }, {
             "description" : "Publishes completed windows to",
-            "destinationId" : "87",
-            "id" : "89",
+            "destinationId" : "90",
+            "id" : "92",
             "linkedRelationshipId" : "60",
             "sourceId" : "73",
             "technology" : "reactive subscription"
@@ -140,60 +147,97 @@
         "instances" : "1",
         "name" : "dsh 0.1.1-rc.2",
         "properties" : {
-          "structurizr.dsl.identifier" : "3601accf-0f54-49b1-958a-6e4551f60fcb"
+          "structurizr.dsl.identifier" : "87422027-5b9c-4d3d-a71e-acbf8a671d9c"
         },
         "tags" : "Element,Deployment Node",
         "technology" : "Node"
       } ],
-      "description" : "The victim's own machine. The harness and its session log never leave it.",
+      "description" : "The victim's own machine. The harness and its session log never leave it — which is why the exfiltration has to go through something else's servers.",
       "environment" : "Live",
       "id" : "64",
       "instances" : "1",
       "name" : "Engineer B laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "120e7182-f57a-4fc9-881e-93347f14a125"
+        "structurizr.dsl.identifier" : "b59926d6-6cda-48dc-9a3c-a9f49e6e7379"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "macOS"
     }, {
-      "children" : [ {
-        "description" : "Re-subscribes and rebuilds its state from the durable log rather than restarting from zero.",
+      "description" : "The attacker's own machine. Sets the goal, plants the message, and touches nothing else.",
+      "environment" : "Live",
+      "id" : "76",
+      "instances" : "1",
+      "name" : "Engineer A laptop",
+      "properties" : {
+        "structurizr.dsl.identifier" : "7f6d7a1f-af64-499e-b393-56974d0af82d"
+      },
+      "softwareSystemInstances" : [ {
+        "deploymentGroups" : [ "Default" ],
         "environment" : "Live",
         "id" : "77",
-        "instances" : "1",
-        "name" : "Detection worker",
+        "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "9b74cd35-a242-4acb-96f0-88db860f8160"
+          "structurizr.dsl.identifier" : "f8ce7d02-264f-4670-b7e3-ff41445f14d0"
+        },
+        "relationships" : [ {
+          "description" : "Posts hidden instructions to",
+          "destinationId" : "94",
+          "id" : "97",
+          "linkedRelationshipId" : "21",
+          "sourceId" : "77",
+          "technology" : "Slack API"
+        } ],
+        "softwareSystemId" : "3",
+        "tags" : "Software System Instance"
+      } ],
+      "tags" : "Element,Deployment Node",
+      "technology" : "macOS"
+    }, {
+      "children" : [ {
+        "description" : "Receives indicator records. Stateless: it forwards, it does not judge.",
+        "environment" : "Live",
+        "id" : "79",
+        "instances" : "1",
+        "name" : "OTLP collector",
+        "properties" : {
+          "structurizr.dsl.identifier" : "04591d86-30b6-4ae7-9747-95c218ca9ca1"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
           "environment" : "Live",
-          "id" : "78",
+          "id" : "80",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "ceff84f1-0979-40b8-bb8f-66e39d1dffe6"
+            "structurizr.dsl.identifier" : "3aaa84ae-a8a1-407d-b47b-6c502b752ddc"
           },
+          "relationships" : [ {
+            "description" : "routes hosts and canary hashes to",
+            "destinationId" : "102",
+            "id" : "104",
+            "linkedRelationshipId" : "55",
+            "sourceId" : "80"
+          } ],
           "softwareSystemId" : "6",
           "tags" : "Software System Instance"
         } ],
         "tags" : "Element,Deployment Node",
-        "technology" : "background worker"
+        "technology" : "collector"
       }, {
-        "description" : "Engineer A's drop. Outside the victim's host by construction — the whole point is that it is reachable from Slack's servers.",
+        "description" : "Engineer A's drop. Reachable from Slack's servers by construction — that is the whole vector.",
         "environment" : "Live",
-        "id" : "80",
+        "id" : "83",
         "instances" : "1",
         "name" : "Attacker listener host",
         "properties" : {
-          "structurizr.dsl.identifier" : "6dfb8f50-8bbc-4802-baec-39a5be9e2b42"
+          "structurizr.dsl.identifier" : "f28acefd-fd9d-46b8-99b0-37a372241f84"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
           "environment" : "Live",
-          "id" : "81",
+          "id" : "84",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "15f8dec2-e059-4742-9bd1-fcd18f1151d9"
+            "structurizr.dsl.identifier" : "2c268b5c-5838-400d-bd3f-c5cb0c823291"
           },
           "softwareSystemId" : "4",
           "tags" : "Software System Instance"
@@ -201,32 +245,43 @@
         "tags" : "Element,Deployment Node",
         "technology" : "web service"
       } ],
-      "description" : "The delivery plane: everything that must outlive a laptop lid closing, and recover from a dead step by rebuilding from the durable session log.",
+      "description" : "The delivery plane: what must outlive a laptop lid closing.",
       "environment" : "Live",
-      "id" : "76",
+      "id" : "78",
+      "infrastructureNodes" : [ {
+        "description" : "Judges the stream and drives the dashboard. RECOVERS BY RE-SUBSCRIBING rather than restarting from zero: the state it needs is in the realtime store, which is a projection of the session log that remains the source of truth on the victim's laptop.",
+        "environment" : "Live",
+        "id" : "82",
+        "name" : "Detection worker",
+        "properties" : {
+          "structurizr.dsl.identifier" : "f974fbd9-000e-4812-ba87-cee4d74668d9"
+        },
+        "tags" : "Element,Infrastructure Node",
+        "technology" : "background worker"
+      } ],
       "instances" : "1",
       "name" : "Render",
       "properties" : {
-        "structurizr.dsl.identifier" : "5165323b-c01b-498d-a689-396ac4a75256"
+        "structurizr.dsl.identifier" : "fca1f0a0-c355-4dd7-9419-edc253477e8b"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "PaaS"
     }, {
-      "description" : "The inference plane, shared by the victim model and the scorer.",
+      "description" : "The inference plane, shared by the victim model and the scorer so attack-success is measured on one substrate.",
       "environment" : "Live",
-      "id" : "82",
+      "id" : "85",
       "instances" : "1",
       "name" : "Nebius",
       "properties" : {
-        "structurizr.dsl.identifier" : "d70c8f6b-d5c7-4968-8551-72f0d29aff09"
+        "structurizr.dsl.identifier" : "0876480e-6941-461b-ba00-3664e04d78cd"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
         "environment" : "Live",
-        "id" : "83",
+        "id" : "86",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "e6fe2ed1-647f-439b-8dd9-b8ec34e10f4a"
+          "structurizr.dsl.identifier" : "42c5ad82-d5d3-42aa-9d97-01454b09fec9"
         },
         "softwareSystemId" : "7",
         "tags" : "Software System Instance"
@@ -234,21 +289,21 @@
       "tags" : "Element,Deployment Node",
       "technology" : "managed inference"
     }, {
-      "description" : "The realtime plane. Hosted, and the dashboard subscribes to it rather than polling.",
+      "description" : "The realtime plane. Durable enough for the worker to rebuild from, and subscribable so several people watch one run.",
       "environment" : "Live",
-      "id" : "86",
+      "id" : "89",
       "instances" : "1",
       "name" : "Convex",
       "properties" : {
-        "structurizr.dsl.identifier" : "1095e7ab-ecb0-4967-8668-d301d9dceced"
+        "structurizr.dsl.identifier" : "d0ef1eec-0f2c-4e30-a406-a7785d7dad9a"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
         "environment" : "Live",
-        "id" : "87",
+        "id" : "90",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "50d45676-37d8-4248-a75a-0d465481bcef"
+          "structurizr.dsl.identifier" : "fc2ee7b9-d38e-457f-ac62-aa709fda2d8d"
         },
         "softwareSystemId" : "8",
         "tags" : "Software System Instance"
@@ -256,42 +311,81 @@
       "tags" : "Element,Deployment Node",
       "technology" : "managed reactive database"
     }, {
-      "description" : "Not ours, and the unfurl fetch originates here rather than on the victim's host — which is the whole CVE.",
-      "environment" : "Live",
-      "id" : "90",
-      "instances" : "1",
-      "name" : "Slack",
-      "properties" : {
-        "structurizr.dsl.identifier" : "71a9a6d5-0eb5-4530-9326-994fdd0cf922"
-      },
-      "softwareSystemInstances" : [ {
+      "containerInstances" : [ {
+        "containerId" : "10",
         "deploymentGroups" : [ "Default" ],
         "environment" : "Live",
-        "id" : "91",
+        "id" : "94",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "7adf5642-e6a6-46ba-bd38-a087868facf7"
+          "structurizr.dsl.identifier" : "542e4312-2868-4d98-8726-e94b74c32ec0"
         },
         "relationships" : [ {
           "description" : "Returns the poisoned channel to",
           "destinationId" : "66",
-          "id" : "92",
-          "linkedRelationshipId" : "27",
-          "sourceId" : "91",
+          "id" : "95",
+          "linkedRelationshipId" : "25",
+          "sourceId" : "94",
           "technology" : "MCP"
         }, {
+          "description" : "Queues the link preview for",
+          "destinationId" : "98",
+          "id" : "100",
+          "linkedRelationshipId" : "35",
+          "sourceId" : "94"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "11",
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Live",
+        "id" : "98",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "bca2cf26-a520-40df-8ee0-4ef8ee0a4fe8"
+        },
+        "relationships" : [ {
           "description" : "Fetches the url server-side from",
-          "destinationId" : "81",
-          "id" : "94",
-          "linkedRelationshipId" : "37",
-          "sourceId" : "91",
+          "destinationId" : "84",
+          "id" : "99",
+          "linkedRelationshipId" : "36",
+          "sourceId" : "98",
           "technology" : "DNS + HTTPS"
         } ],
-        "softwareSystemId" : "9",
+        "tags" : "Container Instance"
+      } ],
+      "description" : "Not ours. The half of the chain that runs on somebody else's servers.",
+      "environment" : "Live",
+      "id" : "93",
+      "instances" : "1",
+      "name" : "Slack infrastructure",
+      "properties" : {
+        "structurizr.dsl.identifier" : "d99f0254-e9a6-4e37-aca4-e023bb16e2e1"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "SaaS"
+    }, {
+      "description" : "Firewall, EDR and the secret vault: the controls that can drop a packet, sitting where the victim's traffic leaves.",
+      "environment" : "Live",
+      "id" : "101",
+      "instances" : "1",
+      "name" : "Corporate egress",
+      "properties" : {
+        "structurizr.dsl.identifier" : "45c5f570-16fc-4f88-9287-2cfe4da92592"
+      },
+      "softwareSystemInstances" : [ {
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Live",
+        "id" : "102",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "dd734790-4afc-4557-8879-1263464340a4"
+        },
+        "softwareSystemId" : "5",
         "tags" : "Software System Instance"
       } ],
       "tags" : "Element,Deployment Node",
-      "technology" : "SaaS"
+      "technology" : "network"
     } ],
     "people" : [ {
       "description" : "The rival. Owns none of the harness, and hands a personal agent an open-ended goal.",
@@ -867,9 +961,9 @@
       "tags" : "Element,Software System"
     } ]
   },
-  "name" : "No-Leak-MCP",
+  "name" : "mcp-guard",
   "properties" : {
-    "structurizr.inspection.error" : "18",
+    "structurizr.inspection.error" : "24",
     "structurizr.inspection.info" : "0",
     "structurizr.inspection.ignore" : "0",
     "structurizr.inspection.warning" : "0"
@@ -1165,11 +1259,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "80",
+        "id" : "79",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "81",
+        "id" : "80",
         "x" : 0,
         "y" : 0
       }, {
@@ -1181,11 +1275,19 @@
         "x" : 0,
         "y" : 0
       }, {
+        "id" : "84",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "85",
+        "x" : 0,
+        "y" : 0
+      }, {
         "id" : "86",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "87",
+        "id" : "89",
         "x" : 0,
         "y" : 0
       }, {
@@ -1193,7 +1295,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "91",
+        "id" : "101",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "102",
         "x" : 0,
         "y" : 0
       } ],
@@ -1205,6 +1311,10 @@
         "structurizr.tooltips" : "true"
       },
       "relationships" : [ {
+        "id" : "103"
+      }, {
+        "id" : "104"
+      }, {
         "id" : "68"
       }, {
         "id" : "69"
@@ -1217,21 +1327,15 @@
       }, {
         "id" : "75"
       }, {
-        "id" : "79"
+        "id" : "81"
       }, {
-        "id" : "84"
-      }, {
-        "id" : "85"
+        "id" : "87"
       }, {
         "id" : "88"
       }, {
-        "id" : "89"
+        "id" : "91"
       }, {
         "id" : "92"
-      }, {
-        "id" : "93"
-      }, {
-        "id" : "94"
       } ],
       "softwareSystemId" : "12"
     } ],

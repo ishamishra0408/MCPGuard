@@ -1,0 +1,10 @@
+{
+  "generated": "checks/diagram-contrast.mjs --index",
+  "projects": [
+    {
+      "dir": "dsh-mcp-guard",
+      "name": "MCP-Guard",
+      "description": "Blue-team observability and governance over an AI agent's Slack MCP surface."
+    }
+  ]
+}

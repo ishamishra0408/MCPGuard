@@ -72,8 +72,13 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
             unfurl = container "Link unfurl service" "Builds the link preview by fetching the URL from Slack's own servers, not the victim's host." "SaaS"
         }
 
-        dsh = softwareSystem "dsh harness" "The DeepSeek Harness install: the agent loop, its event-sourced session, and the observability layer assembled from spare parts." {
-            run = container "Agent runtime" "The loop, the tools, and the guard slot — the kill point when a bundle is mounted." "dsh · loop · tools · guard" {
+        /* MODIFIED, because two of its containers are. A system whose insides we change is a system
+           we have changed, and the context view is where a reviewer first asks what this project
+           touches (CF-106). */
+        dsh = softwareSystem "dsh harness" "modified — hover for details. The DeepSeek Harness install: the agent loop, its event-sourced session, and the observability layer assembled from spare parts." {
+            tags "Modified"
+            run = container "Agent runtime" "modified — hover for details. The loop, the tools, and the guard slot — the kill point when a bundle is mounted." "dsh · loop · tools · guard" {
+                tags "Modified"
                 perspectives {
                     "Rationale" "Gap in Deepseek Harness\n· the guard slot ships and nothing is mounted in it\n\nvs Claude Code\n· PreToolUse hooks and permission prompts gate the CALL\n· neither gates the VALUE carried inside it\n\nNow possible\n· refuse at assembly, not at fetch — while the URL is still an argument\n· nothing leaves, so there is nothing to detect later"
                 }
@@ -131,7 +136,8 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
                 }
             }
 
-            obs = container "Observability" "Telemetry and invariants: scores ingested content, and asserts no secret reaches a URL without a human in the window." "dsh · telemetry · invariants" {
+            obs = container "Observability" "modified — hover for details. Telemetry and invariants: scores ingested content, and asserts no secret reaches a URL without a human in the window." "dsh · telemetry · invariants" {
+                tags "Modified"
                 /* MODIFIED, not Proposal: dsh-session-telemetry's redact/score waterfall ships EMPTY, so
                    this is a rule in a seat the harness already offers. The stroke says so. */
                 scorer = component "Injection scorer" "modified — hover for details. Suspects: scores ingested text for instruction patterns." "dsh-session-telemetry" {
@@ -380,6 +386,8 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
            THE HEADER WAS REPEATED FOUR TIMES — one per --write run, because the generator prepended
            its comment and matched only the block below it. Collapsed to one; the styles are
            unchanged. */
+        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
+           Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
            Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.

@@ -124,10 +124,6 @@
       "for": "a consumer model with message queues or topics — this repo draws them in payments"
     }
   ],
-  "deliveryStates": [
-    "Modified",
-    "Proposal"
-  ],
   "deliveryLabels": {
     "Proposal": "proposed — hover for details",
     "Modified": "modified — hover for details"
@@ -145,5 +141,37 @@
     "Container Instance",
     "Software System Instance"
   ],
-  "_noClaim_why": "Rows that say WHERE something runs rather than whether we own it. A frame and an instance are both placements; the renderer resolves an instance from the element it instances, so a hue here would overwrite that answer with a false one."
+  "_noClaim_why": "Rows that say WHERE something runs rather than whether we own it. A frame and an instance are both placements; the renderer resolves an instance from the element it instances, so a hue here would overwrite that answer with a false one.",
+  "delivery": {
+    "_what": "The delivery state of one component, as a MACHINE rather than a two-value tag. The shape is adapted from design-loop core/machines.json, which pairs every state with what makes it OBSERVABLE — the fact on disk that proves a thing is in it. A tag nobody can check is an assertion; a state with an observable is a measurement.",
+    "object": "component",
+    "states": [
+      "proposed",
+      "modified",
+      "built",
+      "shipped"
+    ],
+    "observable": {
+      "proposed": "an ADR beside it and no file in the repo that implements it — the argument exists, the code does not",
+      "modified": "an extension point that already ships, carrying a rule of ours — the seam is theirs, the content is ours",
+      "built": "a tracked file in the repo implements it, and its control runs",
+      "shipped": "merged on the default branch of the repo that owns the seam"
+    },
+    "guards": {
+      "proposed": "checks/delivery.mjs — an ADR governs it",
+      "modified": "checks/delivery.mjs — the state is styled and the word is in the description",
+      "built": "NOT BUILT — nothing yet joins a component to the file that implements it",
+      "shipped": "NOT BUILT — nothing yet reads the upstream default branch"
+    },
+    "_guards_why": "Two of the four guards are NOT BUILT and say so. A machine whose later states cannot be observed is a machine that will sit forever in its third state and read as progress; naming the gap is the difference between a roadmap and a claim.",
+    "_styled": [
+      "proposed",
+      "modified"
+    ],
+    "_styled_why": "Only the two states that are OURS-and-not-yet-theirs carry a stroke. built and shipped are the resting states and take the ordinary palette: a diagram that highlighted everything finished would highlight everything.",
+    "tagFor": {
+      "proposed": "Proposal",
+      "modified": "Modified"
+    }
+  }
 }

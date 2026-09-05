@@ -13,7 +13,7 @@
           "id" : "73",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "148b49d9-6ce6-4193-9a15-f78a323226cd"
+            "structurizr.dsl.identifier" : "3b145fd6-a955-4232-8854-ab70e76c717b"
           },
           "relationships" : [ {
             "description" : "Appends the poisoned result to",
@@ -58,7 +58,7 @@
           "id" : "74",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "356ff934-bf0f-452d-bdb8-49f0ef2e0170"
+            "structurizr.dsl.identifier" : "38817c74-0a93-4d67-adaa-e5d674e14997"
           },
           "relationships" : [ {
             "description" : "Supplies the tagged-secret set to",
@@ -90,7 +90,7 @@
           "id" : "78",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "0a7cfa93-273e-46e6-95d1-0c38cc0bdfaa"
+            "structurizr.dsl.identifier" : "330ca53b-2230-4eb2-8ed5-f0e1e3fd75ad"
           },
           "relationships" : [ {
             "description" : "Reads the read-then-post window from",
@@ -135,7 +135,7 @@
           "id" : "82",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "b4f2ae62-ece3-4bc1-90f3-33c717c0f3a9"
+            "structurizr.dsl.identifier" : "fa3cc854-2e1b-4da9-8a09-7ed337d3c38c"
           },
           "relationships" : [ {
             "description" : "Pushes a completed read-then-post window to",
@@ -160,7 +160,7 @@
         "instances" : "1",
         "name" : "dsh 0.1.1-rc.2",
         "properties" : {
-          "structurizr.dsl.identifier" : "578ca5dd-27cc-4088-b67b-fbd2817a36a7"
+          "structurizr.dsl.identifier" : "eb3cdb65-2649-4de8-9013-3092eb732b80"
         },
         "tags" : "Element,Deployment Node",
         "technology" : "Node"
@@ -171,7 +171,7 @@
       "instances" : "1",
       "name" : "Engineer B laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "72fce6fe-6d7f-4b36-9263-125a363d2064"
+        "structurizr.dsl.identifier" : "89d28e9e-a968-4adb-a503-dbaeb3d77243"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "macOS"
@@ -182,7 +182,7 @@
       "instances" : "1",
       "name" : "Engineer A laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "0cec87e3-0288-4728-8789-9181ce173da1"
+        "structurizr.dsl.identifier" : "4c766265-2b98-4807-bf8b-00f6bbedd1bf"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -190,7 +190,7 @@
         "id" : "86",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "55942144-1272-41f1-b8ea-db2e49b38910"
+          "structurizr.dsl.identifier" : "f12da77e-494c-43ac-bbbf-c86566572f02"
         },
         "relationships" : [ {
           "description" : "Posts hidden instructions to",
@@ -213,7 +213,7 @@
         "instances" : "1",
         "name" : "OTLP collector",
         "properties" : {
-          "structurizr.dsl.identifier" : "d53e24d5-9208-49e1-9d76-3fe6d3635c79"
+          "structurizr.dsl.identifier" : "7cb955f2-dfcc-4f88-bf88-7eedeabf7731"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -221,7 +221,7 @@
           "id" : "89",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "5b6064f1-44dc-4b63-9e31-3d931d38c08b"
+            "structurizr.dsl.identifier" : "4b01712c-1a39-4ad6-9262-db9cb3531406"
           },
           "relationships" : [ {
             "description" : "routes hosts and canary hashes to",
@@ -242,7 +242,7 @@
         "instances" : "1",
         "name" : "Attacker listener host",
         "properties" : {
-          "structurizr.dsl.identifier" : "9a1671f5-bbeb-454f-82b5-5f2a4e58ff16"
+          "structurizr.dsl.identifier" : "9eae9b44-4175-4e81-b8d3-8912a3fa0601"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -250,7 +250,7 @@
           "id" : "93",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "bec6a3f2-05f9-4468-abe6-fc92d01dbdcc"
+            "structurizr.dsl.identifier" : "8b60bc53-6c00-4eb8-a4de-824153a0b05a"
           },
           "softwareSystemId" : "4",
           "tags" : "Software System Instance"
@@ -267,7 +267,7 @@
         "id" : "91",
         "name" : "Detection worker",
         "properties" : {
-          "structurizr.dsl.identifier" : "de9c9c1e-42bb-46fa-a9d0-6744d997c6f3"
+          "structurizr.dsl.identifier" : "5069f865-7098-4917-ad50-07265a1240bf"
         },
         "tags" : "Element,Infrastructure Node",
         "technology" : "background worker"
@@ -275,7 +275,7 @@
       "instances" : "1",
       "name" : "Render",
       "properties" : {
-        "structurizr.dsl.identifier" : "9b54cb1d-9e50-425e-adf6-b77e9bda0649"
+        "structurizr.dsl.identifier" : "fb83eb3f-0634-4b94-b5c4-816496e9401d"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "PaaS"
@@ -286,7 +286,7 @@
       "instances" : "1",
       "name" : "Nebius",
       "properties" : {
-        "structurizr.dsl.identifier" : "f317cb31-b128-462c-9220-62bfb7f6b8db"
+        "structurizr.dsl.identifier" : "86caeada-cae8-43aa-87bd-915e7eb31ef7"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -294,7 +294,7 @@
         "id" : "95",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "e7a1bcb6-feda-42c9-ad27-c0f95e1464a8"
+          "structurizr.dsl.identifier" : "944e5966-eb76-457a-8807-d80f03e849c7"
         },
         "softwareSystemId" : "7",
         "tags" : "Software System Instance"
@@ -308,7 +308,7 @@
       "instances" : "1",
       "name" : "Convex",
       "properties" : {
-        "structurizr.dsl.identifier" : "7b4a61a6-4d6e-4568-bda2-9d9257bde8bb"
+        "structurizr.dsl.identifier" : "44bbaefd-e432-4856-ab40-569d03b9b29f"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -316,7 +316,7 @@
         "id" : "99",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "7f5581d0-bfa8-48c1-8a38-0760087c8628"
+          "structurizr.dsl.identifier" : "6d23cd23-9d2c-43b9-a948-89da58986f10"
         },
         "softwareSystemId" : "8",
         "tags" : "Software System Instance"
@@ -331,7 +331,7 @@
         "id" : "103",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "7c2754d0-8a48-4b30-b2eb-9efaa5ac51b4"
+          "structurizr.dsl.identifier" : "4e990c43-35b9-46db-85bd-489390e893f3"
         },
         "relationships" : [ {
           "description" : "Returns the poisoned channel to",
@@ -355,7 +355,7 @@
         "id" : "107",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "bba8f132-ca97-4d92-b5b6-6ac7c97e1f08"
+          "structurizr.dsl.identifier" : "f8875263-0dbf-4a70-9e0d-ee3c19852853"
         },
         "relationships" : [ {
           "description" : "Fetches the url server-side from",
@@ -373,7 +373,7 @@
       "instances" : "1",
       "name" : "Slack infrastructure",
       "properties" : {
-        "structurizr.dsl.identifier" : "6aaf4a78-eb04-4459-b5db-bf77da8cb474"
+        "structurizr.dsl.identifier" : "f42ddbb6-cbdc-4ebf-b11c-e39b75bc1558"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "SaaS"
@@ -384,7 +384,7 @@
       "instances" : "1",
       "name" : "Corporate egress",
       "properties" : {
-        "structurizr.dsl.identifier" : "3f418e95-5373-47ed-8f6a-3172470d992a"
+        "structurizr.dsl.identifier" : "b815a5e5-f301-4ec1-b1d0-6f9e789cec5d"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -392,7 +392,7 @@
         "id" : "111",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "b9cfb1bd-7d6f-4b63-b7bf-c8e0870068e6"
+          "structurizr.dsl.identifier" : "e32fbff8-4606-47d6-90b4-2f208a5a745e"
         },
         "softwareSystemId" : "5",
         "tags" : "Software System Instance"
@@ -667,7 +667,7 @@
           "tags" : "Element,Component,Proposal",
           "technology" : "dsh-tools · ctx.tools.guard"
         } ],
-        "description" : "The loop, the tools, and the guard slot — the kill point when a bundle is mounted.",
+        "description" : "modified — hover for details. The loop, the tools, and the guard slot — the kill point when a bundle is mounted.",
         "documentation" : { },
         "id" : "13",
         "name" : "Agent runtime",
@@ -732,7 +732,7 @@
           "tags" : "Relationship",
           "technology" : "OpenAI-compatible"
         } ],
-        "tags" : "Element,Container",
+        "tags" : "Element,Container,Modified",
         "technology" : "dsh · loop · tools · guard"
       }, {
         "description" : "Event-sourced: every step of the chain is already written down here before anyone asks.",
@@ -933,7 +933,7 @@
           "tags" : "Element,Component",
           "technology" : "dsh-session-telemetry-otel"
         } ],
-        "description" : "Telemetry and invariants: scores ingested content, and asserts no secret reaches a URL without a human in the window.",
+        "description" : "modified — hover for details. Telemetry and invariants: scores ingested content, and asserts no secret reaches a URL without a human in the window.",
         "documentation" : { },
         "id" : "17",
         "name" : "Observability",
@@ -975,10 +975,10 @@
           "sourceId" : "17",
           "technology" : "OTLP/HTTP"
         } ],
-        "tags" : "Element,Container",
+        "tags" : "Element,Container,Modified",
         "technology" : "dsh · telemetry · invariants"
       } ],
-      "description" : "The DeepSeek Harness install: the agent loop, its event-sourced session, and the observability layer assembled from spare parts.",
+      "description" : "modified — hover for details. The DeepSeek Harness install: the agent loop, its event-sourced session, and the observability layer assembled from spare parts.",
       "documentation" : { },
       "id" : "12",
       "name" : "dsh harness",
@@ -1034,7 +1034,7 @@
         "sourceId" : "12",
         "technology" : "reactive subscription"
       } ],
-      "tags" : "Element,Software System"
+      "tags" : "Element,Software System,Modified"
     } ]
   },
   "name" : "No-Leak-MCP",

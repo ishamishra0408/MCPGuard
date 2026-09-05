@@ -25,7 +25,7 @@
  * in order, and nothing in the export knows what the source narrative contained. A step-order rule
  * catches a renumbering; only a reader catches an omission.
  */
-workspace "mcp-guard" "Blocks silent credential exfiltration." {
+workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
 
     model {
         engA = person "Engineer A" "The rival. Owns none of the harness, and hands a personal agent an open-ended goal."

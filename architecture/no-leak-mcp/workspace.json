@@ -13,7 +13,7 @@
           "id" : "66",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "c2d22e64-4533-4125-8908-eda82516c747"
+            "structurizr.dsl.identifier" : "6b9736e4-e37c-477e-aaf4-2a8bec9eece6"
           },
           "relationships" : [ {
             "description" : "Appends the poisoned result to",
@@ -52,7 +52,7 @@
           "id" : "67",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "c1647338-b17f-41af-99d4-80050ef487f9"
+            "structurizr.dsl.identifier" : "29ff87ae-3a8d-4569-ad3c-d1ad4a9c14db"
           },
           "relationships" : [ {
             "description" : "Hands the redacted record to",
@@ -77,7 +77,7 @@
           "id" : "70",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "33aa7ec3-4a6b-41ec-a066-8d5a68fdd682"
+            "structurizr.dsl.identifier" : "1fc368e7-7983-4401-a7fd-2af8710c87d2"
           },
           "relationships" : [ {
             "description" : "Reads the read-then-post window from",
@@ -122,7 +122,7 @@
           "id" : "73",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "c14149d1-a3ee-460e-901a-3a8a1d25c1ae"
+            "structurizr.dsl.identifier" : "66ede70c-708d-4b7e-91ff-22560d46607c"
           },
           "relationships" : [ {
             "description" : "Pushes a completed read-then-post window to",
@@ -147,7 +147,7 @@
         "instances" : "1",
         "name" : "dsh 0.1.1-rc.2",
         "properties" : {
-          "structurizr.dsl.identifier" : "87422027-5b9c-4d3d-a71e-acbf8a671d9c"
+          "structurizr.dsl.identifier" : "f2dce89b-ef20-4de9-8831-422e9f9eb8d3"
         },
         "tags" : "Element,Deployment Node",
         "technology" : "Node"
@@ -158,7 +158,7 @@
       "instances" : "1",
       "name" : "Engineer B laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "b59926d6-6cda-48dc-9a3c-a9f49e6e7379"
+        "structurizr.dsl.identifier" : "13373b61-997d-4c8e-bd23-2311626ae757"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "macOS"
@@ -169,7 +169,7 @@
       "instances" : "1",
       "name" : "Engineer A laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "7f6d7a1f-af64-499e-b393-56974d0af82d"
+        "structurizr.dsl.identifier" : "5ee89a28-bf4d-4d28-8488-c58620f24bcb"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -177,7 +177,7 @@
         "id" : "77",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "f8ce7d02-264f-4670-b7e3-ff41445f14d0"
+          "structurizr.dsl.identifier" : "e8b2088b-f9e6-46b1-8b57-55329b967f1b"
         },
         "relationships" : [ {
           "description" : "Posts hidden instructions to",
@@ -200,7 +200,7 @@
         "instances" : "1",
         "name" : "OTLP collector",
         "properties" : {
-          "structurizr.dsl.identifier" : "04591d86-30b6-4ae7-9747-95c218ca9ca1"
+          "structurizr.dsl.identifier" : "3b19e3ee-c421-452a-a67f-93fa4152f5c2"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -208,7 +208,7 @@
           "id" : "80",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "3aaa84ae-a8a1-407d-b47b-6c502b752ddc"
+            "structurizr.dsl.identifier" : "e36eb876-b1b6-4440-a9c5-c48e2c85ea68"
           },
           "relationships" : [ {
             "description" : "routes hosts and canary hashes to",
@@ -229,7 +229,7 @@
         "instances" : "1",
         "name" : "Attacker listener host",
         "properties" : {
-          "structurizr.dsl.identifier" : "f28acefd-fd9d-46b8-99b0-37a372241f84"
+          "structurizr.dsl.identifier" : "a2ae4e01-98bd-4aad-8c36-97675ee8555d"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -237,7 +237,7 @@
           "id" : "84",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "2c268b5c-5838-400d-bd3f-c5cb0c823291"
+            "structurizr.dsl.identifier" : "c68b6e76-fc7e-410e-aa31-ac5d7dee55f1"
           },
           "softwareSystemId" : "4",
           "tags" : "Software System Instance"
@@ -254,7 +254,7 @@
         "id" : "82",
         "name" : "Detection worker",
         "properties" : {
-          "structurizr.dsl.identifier" : "f974fbd9-000e-4812-ba87-cee4d74668d9"
+          "structurizr.dsl.identifier" : "e7159999-83ef-4bb0-8795-2c07d9b2ee03"
         },
         "tags" : "Element,Infrastructure Node",
         "technology" : "background worker"
@@ -262,7 +262,7 @@
       "instances" : "1",
       "name" : "Render",
       "properties" : {
-        "structurizr.dsl.identifier" : "fca1f0a0-c355-4dd7-9419-edc253477e8b"
+        "structurizr.dsl.identifier" : "cc651368-998d-430e-9740-e8caef90d84d"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "PaaS"
@@ -273,7 +273,7 @@
       "instances" : "1",
       "name" : "Nebius",
       "properties" : {
-        "structurizr.dsl.identifier" : "0876480e-6941-461b-ba00-3664e04d78cd"
+        "structurizr.dsl.identifier" : "d33c365d-f55d-4539-986a-d57dcda80e4d"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -281,7 +281,7 @@
         "id" : "86",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "42c5ad82-d5d3-42aa-9d97-01454b09fec9"
+          "structurizr.dsl.identifier" : "29f1ad1b-4579-4d91-9992-b8e23b6c8298"
         },
         "softwareSystemId" : "7",
         "tags" : "Software System Instance"
@@ -295,7 +295,7 @@
       "instances" : "1",
       "name" : "Convex",
       "properties" : {
-        "structurizr.dsl.identifier" : "d0ef1eec-0f2c-4e30-a406-a7785d7dad9a"
+        "structurizr.dsl.identifier" : "00dceb17-209a-4aca-92b3-715f67c4fe7b"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -303,7 +303,7 @@
         "id" : "90",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "fc2ee7b9-d38e-457f-ac62-aa709fda2d8d"
+          "structurizr.dsl.identifier" : "63857c6a-c509-4d87-b56d-a2aa727bf34d"
         },
         "softwareSystemId" : "8",
         "tags" : "Software System Instance"
@@ -318,7 +318,7 @@
         "id" : "94",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "542e4312-2868-4d98-8726-e94b74c32ec0"
+          "structurizr.dsl.identifier" : "be17062d-5a41-464b-b8f6-751b8d8f07cb"
         },
         "relationships" : [ {
           "description" : "Returns the poisoned channel to",
@@ -342,7 +342,7 @@
         "id" : "98",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "bca2cf26-a520-40df-8ee0-4ef8ee0a4fe8"
+          "structurizr.dsl.identifier" : "39944939-1c00-4cd1-90cc-6239ee5951e9"
         },
         "relationships" : [ {
           "description" : "Fetches the url server-side from",
@@ -360,7 +360,7 @@
       "instances" : "1",
       "name" : "Slack infrastructure",
       "properties" : {
-        "structurizr.dsl.identifier" : "d99f0254-e9a6-4e37-aca4-e023bb16e2e1"
+        "structurizr.dsl.identifier" : "0b6bdb54-62c3-4ca7-8679-74c7d1c63cd0"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "SaaS"
@@ -371,7 +371,7 @@
       "instances" : "1",
       "name" : "Corporate egress",
       "properties" : {
-        "structurizr.dsl.identifier" : "45c5f570-16fc-4f88-9287-2cfe4da92592"
+        "structurizr.dsl.identifier" : "c8aa81c1-b930-4be0-b682-5d7e654f4dbb"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -379,7 +379,7 @@
         "id" : "102",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "dd734790-4afc-4557-8879-1263464340a4"
+          "structurizr.dsl.identifier" : "92e86cd9-6154-4fce-a65c-72125eecb192"
         },
         "softwareSystemId" : "5",
         "tags" : "Software System Instance"
@@ -961,7 +961,7 @@
       "tags" : "Element,Software System"
     } ]
   },
-  "name" : "mcp-guard",
+  "name" : "No-Leak-MCP",
   "properties" : {
     "structurizr.inspection.error" : "24",
     "structurizr.inspection.info" : "0",

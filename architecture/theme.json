@@ -9,7 +9,8 @@
     "shape": "a store is a cylinder, a queue or topic is a pipe, and a person is a person. Shape carries what colour must not be asked to carry twice.",
     "line": "a solid line is a call that blocks; a dashed line is a message that does not. The book offers both conventions in ch10 and requires neither, so this file is where the choice is made.",
     "frame": "a deployment node is where things RUN, not a thing we build, so it is drawn as a frame: no fill, a light stroke. It makes no hue claim because ownership is not what it says.",
-    "delivery": "the STROKE says whether we are proposing it, and the DESCRIPTION carries the word. Neon pink is a Proposal — a component the harness has no seat for; amber is Modified — a rule in an extension point that already ships empty. Hue is NOT used for this, because ADR 0002 spent it on ownership. Measured on the canvas: pink 5.00:1, amber 9.06:1, and their greyscale lightness is 0.278 against 0.545, so the two stay apart with the colour removed."
+    "delivery": "the STROKE says whether we are proposing it, and the DESCRIPTION carries the word. Neon pink is a Proposal — a component the harness has no seat for; amber is Modified — a rule in an extension point that already ships empty. Hue is NOT used for this, because ADR 0002 spent it on ownership. Measured on the canvas: pink 5.00:1, amber 9.06:1, and their greyscale lightness is 0.278 against 0.545, so the two stay apart with the colour removed.",
+    "accounting": "A style row that no view here draws must say ON THE ROW who it is for. The palette is seeded outward, so a row can exist for somebody else’s model; what is refused is a row nobody can account for. The field is `for`, which is the word machinery.json already uses for the same question."
   },
   "canvas": "#1F2226",
   "ramp": [
@@ -70,7 +71,8 @@
       "tag": "Channel",
       "shape": "Pipe",
       "background": "#5a5fa6",
-      "stroke": "#b9bdf5"
+      "stroke": "#b9bdf5",
+      "for": "a consumer model with message queues or topics — this repo draws them in payments"
     },
     {
       "tag": "Deployment Node",
@@ -87,12 +89,14 @@
     {
       "tag": "Modified",
       "stroke": "#ffb454",
-      "strokeWidth": 4
+      "strokeWidth": 4,
+      "for": "any repo marking a rule it adds to an extension point that already ships"
     },
     {
       "tag": "Proposal",
       "stroke": "#ff2fd0",
-      "strokeWidth": 6
+      "strokeWidth": 6,
+      "for": "any repo marking a component the system it extends has no seat for"
     }
   ],
   "relationships": [
@@ -105,7 +109,8 @@
       "tag": "Asynchronous",
       "color": "#d7dbe3",
       "fontSize": 24,
-      "dashed": true
+      "dashed": true,
+      "for": "a consumer model with message queues or topics — this repo draws them in payments"
     }
   ],
   "deliveryStates": [
@@ -115,10 +120,5 @@
   "deliveryLabels": {
     "Proposal": "proposed — hover for details",
     "Modified": "modified — hover for details"
-  },
-  "offered": [
-    "Channel",
-    "Asynchronous"
-  ],
-  "_offered_why": "Rows this palette provides for a consumer model to use, which THIS repo may not draw. The theme is seeded outward by bin/drawing-office.mjs, so a style can exist for somebody else's queues; checks/diagram-key.mjs exempts a declared vocabulary from its unused-row rule and still fires on an undeclared row nobody draws."
+  }
 }

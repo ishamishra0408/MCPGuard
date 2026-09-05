@@ -4,6 +4,295 @@
   "documentation" : { },
   "id" : 0,
   "model" : {
+    "deploymentNodes" : [ {
+      "children" : [ {
+        "containerInstances" : [ {
+          "containerId" : "13",
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "66",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "73c0eb28-7d54-483e-bc5e-d29153e1c1a5"
+          },
+          "relationships" : [ {
+            "description" : "Appends the poisoned result to",
+            "destinationId" : "67",
+            "id" : "68",
+            "linkedRelationshipId" : "29",
+            "sourceId" : "66",
+            "technology" : "durable event · credential already logged"
+          }, {
+            "description" : "Appends the post call and its result to",
+            "destinationId" : "67",
+            "id" : "69",
+            "linkedRelationshipId" : "34",
+            "sourceId" : "66",
+            "technology" : "durable event"
+          }, {
+            "description" : "Requests completions from",
+            "destinationId" : "83",
+            "id" : "84",
+            "linkedRelationshipId" : "56",
+            "sourceId" : "66",
+            "technology" : "OpenAI-compatible"
+          }, {
+            "description" : "Posts the unfurl link to",
+            "destinationId" : "91",
+            "id" : "93",
+            "linkedRelationshipId" : "31",
+            "sourceId" : "66",
+            "technology" : "no guard mounted"
+          } ],
+          "tags" : "Container Instance"
+        }, {
+          "containerId" : "14",
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "67",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "82947e4d-8bad-40c1-a345-e12583476bd1"
+          },
+          "relationships" : [ {
+            "description" : "Hands the redacted record to",
+            "destinationId" : "70",
+            "id" : "72",
+            "linkedRelationshipId" : "41",
+            "sourceId" : "67",
+            "technology" : "sessionTelemetry/record"
+          }, {
+            "description" : "Streams session events to",
+            "destinationId" : "73",
+            "id" : "74",
+            "linkedRelationshipId" : "47",
+            "sourceId" : "67",
+            "technology" : "durable event"
+          } ],
+          "tags" : "Container Instance"
+        }, {
+          "containerId" : "16",
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "70",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "0f0775a5-7711-48ca-9e81-252b3a4801f3"
+          },
+          "relationships" : [ {
+            "description" : "Reads the read-then-post window from",
+            "destinationId" : "67",
+            "id" : "71",
+            "linkedRelationshipId" : "42",
+            "sourceId" : "70"
+          }, {
+            "description" : "emits indicator records to",
+            "destinationId" : "78",
+            "id" : "79",
+            "linkedRelationshipId" : "53",
+            "sourceId" : "70",
+            "technology" : "OTLP/HTTP"
+          }, {
+            "description" : "Scores ingested content with",
+            "destinationId" : "83",
+            "id" : "85",
+            "linkedRelationshipId" : "59",
+            "sourceId" : "70",
+            "technology" : "second model call"
+          }, {
+            "description" : "Streams guard decisions and the success metric to",
+            "destinationId" : "87",
+            "id" : "88",
+            "linkedRelationshipId" : "63",
+            "sourceId" : "70",
+            "technology" : "OTLP/HTTP"
+          } ],
+          "tags" : "Container Instance"
+        }, {
+          "containerId" : "15",
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "73",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "b4260f0c-f825-4bf4-89d6-9b413447bc11"
+          },
+          "relationships" : [ {
+            "description" : "Pushes a completed read-then-post window to",
+            "destinationId" : "70",
+            "id" : "75",
+            "linkedRelationshipId" : "49",
+            "sourceId" : "73",
+            "technology" : "reactive subscription"
+          }, {
+            "description" : "Publishes completed windows to",
+            "destinationId" : "87",
+            "id" : "89",
+            "linkedRelationshipId" : "60",
+            "sourceId" : "73",
+            "technology" : "reactive subscription"
+          } ],
+          "tags" : "Container Instance"
+        } ],
+        "description" : "The harness install.",
+        "environment" : "Live",
+        "id" : "65",
+        "instances" : "1",
+        "name" : "dsh 0.1.1-rc.2",
+        "properties" : {
+          "structurizr.dsl.identifier" : "47559a52-918b-4177-aded-765cc2849bdc"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Node"
+      } ],
+      "description" : "The victim's own machine. The harness and its session log never leave it.",
+      "environment" : "Live",
+      "id" : "64",
+      "instances" : "1",
+      "name" : "Engineer B laptop",
+      "properties" : {
+        "structurizr.dsl.identifier" : "5ebb36f2-1f60-4235-b799-b65208d039db"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "macOS"
+    }, {
+      "children" : [ {
+        "description" : "Re-subscribes and rebuilds its state from the durable log rather than restarting from zero.",
+        "environment" : "Live",
+        "id" : "77",
+        "instances" : "1",
+        "name" : "Detection worker",
+        "properties" : {
+          "structurizr.dsl.identifier" : "2d56772f-dfc8-4a8b-83a9-a3134f108003"
+        },
+        "softwareSystemInstances" : [ {
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "78",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "76a57aa8-c79e-4243-93bb-9f44e63dcdb3"
+          },
+          "softwareSystemId" : "6",
+          "tags" : "Software System Instance"
+        } ],
+        "tags" : "Element,Deployment Node",
+        "technology" : "background worker"
+      }, {
+        "description" : "Engineer A's drop. Outside the victim's host by construction — the whole point is that it is reachable from Slack's servers.",
+        "environment" : "Live",
+        "id" : "80",
+        "instances" : "1",
+        "name" : "Attacker listener host",
+        "properties" : {
+          "structurizr.dsl.identifier" : "70a443f7-5bb9-4dd2-b0df-cdeb5a08cfc3"
+        },
+        "softwareSystemInstances" : [ {
+          "deploymentGroups" : [ "Default" ],
+          "environment" : "Live",
+          "id" : "81",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "804aa2d1-a839-4de8-bb4b-ee8e29afc8d0"
+          },
+          "softwareSystemId" : "4",
+          "tags" : "Software System Instance"
+        } ],
+        "tags" : "Element,Deployment Node",
+        "technology" : "web service"
+      } ],
+      "description" : "The delivery plane: everything that must outlive a laptop lid closing, and recover from a dead step by rebuilding from the durable session log.",
+      "environment" : "Live",
+      "id" : "76",
+      "instances" : "1",
+      "name" : "Render",
+      "properties" : {
+        "structurizr.dsl.identifier" : "eb5bdd12-20b4-485b-a760-0478b85fbef2"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "PaaS"
+    }, {
+      "description" : "The inference plane, shared by the victim model and the scorer.",
+      "environment" : "Live",
+      "id" : "82",
+      "instances" : "1",
+      "name" : "Nebius",
+      "properties" : {
+        "structurizr.dsl.identifier" : "6ba6210a-3cd8-4d97-9c2c-54ce42c759bb"
+      },
+      "softwareSystemInstances" : [ {
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Live",
+        "id" : "83",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "13be3faf-97ee-45df-b1f6-d6d6853c932e"
+        },
+        "softwareSystemId" : "7",
+        "tags" : "Software System Instance"
+      } ],
+      "tags" : "Element,Deployment Node",
+      "technology" : "managed inference"
+    }, {
+      "description" : "The realtime plane. Hosted, and the dashboard subscribes to it rather than polling.",
+      "environment" : "Live",
+      "id" : "86",
+      "instances" : "1",
+      "name" : "Convex",
+      "properties" : {
+        "structurizr.dsl.identifier" : "90bc1746-dbf2-40d1-bf99-cf1b6fdf5fdb"
+      },
+      "softwareSystemInstances" : [ {
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Live",
+        "id" : "87",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "62516f4e-5143-4146-aec3-d91bb96df83e"
+        },
+        "softwareSystemId" : "8",
+        "tags" : "Software System Instance"
+      } ],
+      "tags" : "Element,Deployment Node",
+      "technology" : "managed reactive database"
+    }, {
+      "description" : "Not ours, and the unfurl fetch originates here rather than on the victim's host — which is the whole CVE.",
+      "environment" : "Live",
+      "id" : "90",
+      "instances" : "1",
+      "name" : "Slack",
+      "properties" : {
+        "structurizr.dsl.identifier" : "734629c4-c24c-4bcb-8615-1e41d1d25ca2"
+      },
+      "softwareSystemInstances" : [ {
+        "deploymentGroups" : [ "Default" ],
+        "environment" : "Live",
+        "id" : "91",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "01956fcc-4350-4b4c-ac24-06c344c67ccf"
+        },
+        "relationships" : [ {
+          "description" : "Returns the poisoned channel to",
+          "destinationId" : "66",
+          "id" : "92",
+          "linkedRelationshipId" : "27",
+          "sourceId" : "91",
+          "technology" : "MCP"
+        }, {
+          "description" : "Fetches the url server-side from",
+          "destinationId" : "81",
+          "id" : "94",
+          "linkedRelationshipId" : "37",
+          "sourceId" : "91",
+          "technology" : "DNS + HTTPS"
+        } ],
+        "softwareSystemId" : "9",
+        "tags" : "Software System Instance"
+      } ],
+      "tags" : "Element,Deployment Node",
+      "technology" : "SaaS"
+    } ],
     "people" : [ {
       "description" : "The rival. Owns none of the harness, and hands a personal agent an open-ended goal.",
       "id" : "1",
@@ -14,7 +303,7 @@
       "relationships" : [ {
         "description" : "Sets an open-ended goal for",
         "destinationId" : "3",
-        "id" : "18",
+        "id" : "20",
         "sourceId" : "1",
         "tags" : "Relationship",
         "technology" : "win the promotion"
@@ -29,15 +318,15 @@
       },
       "relationships" : [ {
         "description" : "Asks for a standup summary from",
-        "destinationId" : "11",
-        "id" : "21",
+        "destinationId" : "13",
+        "id" : "23",
         "sourceId" : "2",
         "tags" : "Relationship"
       }, {
         "description" : "Asks for a standup summary from",
-        "destinationId" : "10",
-        "id" : "22",
-        "linkedRelationshipId" : "21",
+        "destinationId" : "12",
+        "id" : "24",
+        "linkedRelationshipId" : "23",
         "sourceId" : "2"
       } ],
       "tags" : "Element,Person"
@@ -52,16 +341,16 @@
       },
       "relationships" : [ {
         "description" : "Posts hidden instructions to",
-        "destinationId" : "8",
-        "id" : "19",
+        "destinationId" : "10",
+        "id" : "21",
         "sourceId" : "3",
         "tags" : "Relationship",
         "technology" : "Slack API"
       }, {
         "description" : "Posts hidden instructions to",
-        "destinationId" : "7",
-        "id" : "20",
-        "linkedRelationshipId" : "19",
+        "destinationId" : "9",
+        "id" : "22",
+        "linkedRelationshipId" : "21",
         "sourceId" : "3",
         "technology" : "Slack API"
       } ],
@@ -77,7 +366,7 @@
       "relationships" : [ {
         "description" : "Delivers the stolen credential to",
         "destinationId" : "1",
-        "id" : "36",
+        "id" : "38",
         "sourceId" : "4",
         "tags" : "Relationship"
       } ],
@@ -102,39 +391,83 @@
       "relationships" : [ {
         "description" : "routes hosts and canary hashes to",
         "destinationId" : "5",
-        "id" : "53",
+        "id" : "55",
         "sourceId" : "6",
         "tags" : "Relationship"
       } ],
       "tags" : "Element,Software System,Existing System"
     }, {
+      "description" : "proposed — hover for details. Serves the victim model and the injection scorer from one plane, so attack-success is measured against a fixed inference substrate.",
+      "documentation" : {
+        "decisions" : [ {
+          "content" : "# 1. One inference plane serves both the victim and the scorer\n\nDate: 2026-09-05\n\n## Status\n\nAccepted\n\n## Context\n\nThe finding this project rests on is that a capable-but-not-safety-hardened model obeys the\ninjection while Claude refuses it, 4 of 4. That is a claim about models, so it only means something\nagainst a fixed inference substrate: if the victim run and the scoring run sit on different\nproviders, an attack-success number is a statement about two vendors' availability rather than about\nthe guard.\n\nThe harness names no inference provider. Whatever the operator wired is what runs, and the scorer —\nwhich needs a second model call on every ingested message — has no seat that owns it at all.\n\n## Decision\n\nOne managed inference plane serves both the victim model and the injection scorer. The headline\nmetric is then a comparison on one substrate: same provider, same config, bundle off then on.\n\n## Consequences\n\nThe provider becomes a single point of failure for the demo, which is accepted: a run that cannot\nreach inference reports UNEVALUABLE rather than a success of 0, and a 0 that means \"the model was\nunreachable\" is the one result that would falsely flatter the guard.\n\nIt also couples the scorer's cost to the victim's traffic. That is the honest shape — the scorer\nreads everything the agent ingests — and it is why the scorer is a scoring call rather than a second\nagent.\n",
+          "date" : "2026-09-05T07:00:00Z",
+          "format" : "Markdown",
+          "id" : "1",
+          "status" : "Accepted",
+          "title" : "One inference plane serves both the victim and the scorer"
+        } ]
+      },
+      "id" : "7",
+      "name" : "Nebius inference",
+      "perspectives" : [ {
+        "description" : "Gap in Deepseek Harness\n· the harness names no inference provider; reliability of the victim run is whatever the operator wired\n· a scorer needs a second model call and there is no seat that owns it\n\nvs Claude Code\n· Claude Code is bound to one vendor, so the question does not arise for it\n· here the finding is that a capable-but-not-hardened model obeys, which only means something on a plane you can pin\n\nNow possible\n· attack-success-rate becomes reproducible: same substrate, bundle off then on\n· the scorer stops competing with the victim for a different provider's quota",
+        "name" : "Rationale"
+      } ],
+      "properties" : {
+        "structurizr.dsl.identifier" : "nebius"
+      },
+      "tags" : "Element,Software System,Proposal"
+    }, {
+      "description" : "proposed — hover for details. Holds the live event stream and the attack-success metric, and pushes both to every viewer at once.",
+      "documentation" : {
+        "decisions" : [ {
+          "content" : "# 1. The realtime metric lives outside the harness\n\nDate: 2026-09-05\n\n## Status\n\nAccepted\n\n## Context\n\nThe session log is durable, strictly local, and written before anyone asks — which is what makes the\nchain invariant provable after the fact. It is the wrong shape for the thing that has to be watched\nWHILE a run is happening. A second person tailing the same file sees a different moment from the\nfirst, and neither can be pointed at.\n\nClaude Code ships OTel metrics and logs to a collector, which is one-way and per-install. Neither\nharness has a shared, subscribable view of a single run.\n\n## Decision\n\nA hosted reactive database holds the live event stream and the attack-success metric, and every\nviewer subscribes to it. The reactive window index publishes to it rather than a poller asking.\n\nThe harness keeps its local log as the source of truth; this plane is a projection and may be\nrebuilt from it.\n\n## Consequences\n\nTwo people watch attack-success flip 1 to 0 in the same instant, which is the demonstration. The\ncost is a second store that can disagree with the log; it is accepted because the log stays\nauthoritative and the projection is rebuildable from it, so a disagreement is a bug in the\nprojection and never a lost fact.\n",
+          "date" : "2026-09-05T07:00:00Z",
+          "format" : "Markdown",
+          "id" : "1",
+          "status" : "Accepted",
+          "title" : "The realtime metric lives outside the harness"
+        } ]
+      },
+      "id" : "8",
+      "name" : "Convex realtime",
+      "perspectives" : [ {
+        "description" : "Gap in Deepseek Harness\n· the session log is durable and strictly local; nothing publishes it while a run is in flight\n· a second watcher can only tail a file, and sees a different moment from the first\n\nvs Claude Code\n· Claude Code ships OTel metrics and logs to a collector, which is one-way and per-install\n· neither harness has a shared, subscribable view of one run\n\nNow possible\n· two people watch attack-success flip 1 to 0 in the same instant, which is the demo\n· the reactive window index pushes here instead of a poller asking",
+        "name" : "Rationale"
+      } ],
+      "properties" : {
+        "structurizr.dsl.identifier" : "convex"
+      },
+      "tags" : "Element,Software System,Proposal"
+    }, {
       "containers" : [ {
         "description" : "Channels and MCP server: where the poisoned message is planted and the unfurl link is posted.",
         "documentation" : { },
-        "id" : "8",
+        "id" : "10",
         "name" : "Slack workspace",
         "properties" : {
           "structurizr.dsl.identifier" : "slack"
         },
         "relationships" : [ {
           "description" : "Returns the poisoned channel to",
-          "destinationId" : "11",
-          "id" : "23",
-          "sourceId" : "8",
+          "destinationId" : "13",
+          "id" : "25",
+          "sourceId" : "10",
           "tags" : "Relationship",
           "technology" : "MCP"
         }, {
           "description" : "Returns the poisoned channel to",
-          "destinationId" : "10",
-          "id" : "24",
-          "linkedRelationshipId" : "23",
-          "sourceId" : "8",
+          "destinationId" : "12",
+          "id" : "26",
+          "linkedRelationshipId" : "25",
+          "sourceId" : "10",
           "technology" : "MCP"
         }, {
           "description" : "Queues the link preview for",
-          "destinationId" : "9",
-          "id" : "33",
-          "sourceId" : "8",
+          "destinationId" : "11",
+          "id" : "35",
+          "sourceId" : "10",
           "tags" : "Relationship"
         } ],
         "tags" : "Element,Container",
@@ -142,7 +475,7 @@
       }, {
         "description" : "Builds the link preview by fetching the URL from Slack's own servers, not the victim's host.",
         "documentation" : { },
-        "id" : "9",
+        "id" : "11",
         "name" : "Link unfurl service",
         "properties" : {
           "structurizr.dsl.identifier" : "unfurl"
@@ -150,8 +483,8 @@
         "relationships" : [ {
           "description" : "Fetches the url server-side from",
           "destinationId" : "4",
-          "id" : "34",
-          "sourceId" : "9",
+          "id" : "36",
+          "sourceId" : "11",
           "tags" : "Relationship",
           "technology" : "DNS + HTTPS"
         } ],
@@ -160,31 +493,31 @@
       } ],
       "description" : "Channels and the MCP server the agent reads, and the link-unfurl service that fetches previews server-side.",
       "documentation" : { },
-      "id" : "7",
+      "id" : "9",
       "name" : "Slack",
       "properties" : {
         "structurizr.dsl.identifier" : "slackWorkspace"
       },
       "relationships" : [ {
         "description" : "Returns the poisoned channel to",
-        "destinationId" : "11",
-        "id" : "25",
-        "linkedRelationshipId" : "23",
-        "sourceId" : "7",
+        "destinationId" : "13",
+        "id" : "27",
+        "linkedRelationshipId" : "25",
+        "sourceId" : "9",
         "technology" : "MCP"
       }, {
         "description" : "Returns the poisoned channel to",
-        "destinationId" : "10",
-        "id" : "26",
-        "linkedRelationshipId" : "23",
-        "sourceId" : "7",
+        "destinationId" : "12",
+        "id" : "28",
+        "linkedRelationshipId" : "25",
+        "sourceId" : "9",
         "technology" : "MCP"
       }, {
         "description" : "Fetches the url server-side from",
         "destinationId" : "4",
-        "id" : "35",
-        "linkedRelationshipId" : "34",
-        "sourceId" : "7",
+        "id" : "37",
+        "linkedRelationshipId" : "36",
+        "sourceId" : "9",
         "technology" : "DNS + HTTPS"
       } ],
       "tags" : "Element,Software System"
@@ -192,7 +525,7 @@
       "containers" : [ {
         "description" : "The loop, the tools, and the guard slot — the kill point when a bundle is mounted.",
         "documentation" : { },
-        "id" : "11",
+        "id" : "13",
         "name" : "Agent runtime",
         "perspectives" : [ {
           "description" : "Gap in Deepseek Harness\n· the guard slot ships and nothing is mounted in it\n\nvs Claude Code\n· PreToolUse hooks and permission prompts gate the CALL\n· neither gates the VALUE carried inside it\n\nNow possible\n· refuse at assembly, not at fetch — while the URL is still an argument\n· nothing leaves, so there is nothing to detect later",
@@ -203,45 +536,52 @@
         },
         "relationships" : [ {
           "description" : "Appends the poisoned result to",
-          "destinationId" : "12",
-          "id" : "27",
-          "sourceId" : "11",
+          "destinationId" : "14",
+          "id" : "29",
+          "sourceId" : "13",
           "tags" : "Relationship",
           "technology" : "durable event · credential already logged"
         }, {
           "description" : "Posts the unfurl link to",
-          "destinationId" : "8",
-          "id" : "28",
-          "sourceId" : "11",
+          "destinationId" : "10",
+          "id" : "30",
+          "sourceId" : "13",
           "tags" : "Relationship",
           "technology" : "no guard mounted"
         }, {
           "description" : "Posts the unfurl link to",
-          "destinationId" : "7",
-          "id" : "29",
-          "linkedRelationshipId" : "28",
-          "sourceId" : "11",
+          "destinationId" : "9",
+          "id" : "31",
+          "linkedRelationshipId" : "30",
+          "sourceId" : "13",
           "technology" : "no guard mounted"
         }, {
           "description" : "Appends the post call and its result to",
-          "destinationId" : "12",
-          "id" : "32",
-          "sourceId" : "11",
+          "destinationId" : "14",
+          "id" : "34",
+          "sourceId" : "13",
           "tags" : "Relationship",
           "technology" : "durable event"
         }, {
           "description" : "Returns a normal standup summary to",
           "destinationId" : "2",
-          "id" : "37",
-          "sourceId" : "11",
+          "id" : "39",
+          "sourceId" : "13",
           "tags" : "Relationship"
+        }, {
+          "description" : "Requests completions from",
+          "destinationId" : "7",
+          "id" : "56",
+          "sourceId" : "13",
+          "tags" : "Relationship",
+          "technology" : "OpenAI-compatible"
         } ],
         "tags" : "Element,Container",
         "technology" : "dsh · loop · tools · guard"
       }, {
         "description" : "Event-sourced: every step of the chain is already written down here before anyone asks.",
         "documentation" : { },
-        "id" : "12",
+        "id" : "14",
         "name" : "Session store",
         "perspectives" : [ {
           "description" : "Gap in Deepseek Harness\n· none. Event-sourced and shipping, with projection and query over it\n\nvs Claude Code\n· a local transcript, plus a server-side Analytics API\n· Deepseek Harness replays offline; Claude Code queries an API\n\nNow possible\n· nothing on its own\n· the history a pair is tested against — without it there is only a stream",
@@ -252,23 +592,23 @@
         },
         "relationships" : [ {
           "description" : "Hands the redacted record to",
-          "destinationId" : "14",
-          "id" : "39",
-          "sourceId" : "12",
+          "destinationId" : "16",
+          "id" : "41",
+          "sourceId" : "14",
           "tags" : "Relationship",
           "technology" : "sessionTelemetry/record"
         }, {
           "description" : "hands redacted records to",
-          "destinationId" : "15",
-          "id" : "43",
-          "sourceId" : "12",
+          "destinationId" : "17",
+          "id" : "45",
+          "sourceId" : "14",
           "tags" : "Relationship",
           "technology" : "sessionTelemetry/record"
         }, {
           "description" : "Streams session events to",
-          "destinationId" : "13",
-          "id" : "45",
-          "sourceId" : "12",
+          "destinationId" : "15",
+          "id" : "47",
+          "sourceId" : "14",
           "tags" : "Relationship",
           "technology" : "durable event"
         } ],
@@ -286,7 +626,7 @@
             "title" : "The read-then-post window is pushed, not polled"
           } ]
         },
-        "id" : "13",
+        "id" : "15",
         "name" : "Reactive window index",
         "perspectives" : [ {
           "description" : "Gap in Deepseek Harness\n· the invariant POLLS the session store for the window\n· a poll has a period, and the period is the attack's headroom\n\nvs Claude Code\n· no equivalent — prompt.id correlates events after the fact\n· nothing there fires ON the write that completes a pair\n\nNow possible\n· the verdict is ready while the URL is still an argument\n· write and notification share one transaction boundary",
@@ -297,17 +637,24 @@
         },
         "relationships" : [ {
           "description" : "Pushes a completed read-then-post window to",
-          "destinationId" : "16",
-          "id" : "46",
-          "sourceId" : "13",
+          "destinationId" : "18",
+          "id" : "48",
+          "sourceId" : "15",
           "tags" : "Relationship",
           "technology" : "reactive subscription"
         }, {
           "description" : "Pushes a completed read-then-post window to",
-          "destinationId" : "14",
-          "id" : "47",
-          "linkedRelationshipId" : "46",
-          "sourceId" : "13",
+          "destinationId" : "16",
+          "id" : "49",
+          "linkedRelationshipId" : "48",
+          "sourceId" : "15",
+          "technology" : "reactive subscription"
+        }, {
+          "description" : "Publishes completed windows to",
+          "destinationId" : "8",
+          "id" : "60",
+          "sourceId" : "15",
+          "tags" : "Relationship",
           "technology" : "reactive subscription"
         } ],
         "tags" : "Element,Container,Proposal",
@@ -325,7 +672,7 @@
               "title" : "The injection scorer is a rule in a waterfall dsh already ships"
             } ]
           },
-          "id" : "15",
+          "id" : "17",
           "name" : "Injection scorer",
           "perspectives" : [ {
             "description" : "Gap in Deepseek Harness\n· the redact/score waterfall ships empty\n· ingested text is walked once and scored by nothing\n\nvs Claude Code\n· no scoring stage either\n· tool_result carries the text, so scoring runs after export and cannot block\n\nNow possible\n· a first signal in-process and before redaction\n· gives the guard downstream something to weigh",
@@ -336,10 +683,17 @@
           },
           "relationships" : [ {
             "description" : "contributes injection scores to",
-            "destinationId" : "17",
-            "id" : "49",
-            "sourceId" : "15",
+            "destinationId" : "19",
+            "id" : "51",
+            "sourceId" : "17",
             "tags" : "Relationship"
+          }, {
+            "description" : "Scores ingested content with",
+            "destinationId" : "7",
+            "id" : "58",
+            "sourceId" : "17",
+            "tags" : "Relationship",
+            "technology" : "second model call"
           } ],
           "tags" : "Element,Component,Modified",
           "technology" : "dsh-session-telemetry"
@@ -355,7 +709,7 @@
               "title" : "The exfiltration-chain invariant is a new companion on dsh-invariants"
             } ]
           },
-          "id" : "16",
+          "id" : "18",
           "name" : "Chain invariant",
           "perspectives" : [ {
             "description" : "Gap in Deepseek Harness\n· no single call is anomalous\n· the read and the post are both logged, and nothing joins them\n\nvs Claude Code\n· prompt.id joins events to one prompt\n· that is causal correlation, not data flow — the same blind spot\n\nNow possible\n· a claim about a PAIR: an earlier secret reaching a later URL, no approval between\n· makes the guard refusal explainable, the indicator worth acting on",
@@ -366,15 +720,15 @@
           },
           "relationships" : [ {
             "description" : "reads read-then-post windows from",
-            "destinationId" : "12",
-            "id" : "44",
-            "sourceId" : "16",
+            "destinationId" : "14",
+            "id" : "46",
+            "sourceId" : "18",
             "tags" : "Relationship"
           }, {
             "description" : "reports invariant failures to",
-            "destinationId" : "17",
-            "id" : "48",
-            "sourceId" : "16",
+            "destinationId" : "19",
+            "id" : "50",
+            "sourceId" : "18",
             "tags" : "Relationship"
           } ],
           "tags" : "Element,Component,Proposal",
@@ -382,7 +736,7 @@
         }, {
           "description" : "Tells: carries the indicator to something that can block a packet.",
           "documentation" : { },
-          "id" : "17",
+          "id" : "19",
           "name" : "OTLP exporter",
           "perspectives" : [ {
             "description" : "Gap in Deepseek Harness\n· none. Ships and is used unmodified\n\nvs Claude Code\n· parity — OTel metrics and logs/events, OTLP endpoint by environment variable\n· Claude Code adds optional traces; this path has no equivalent\n\nNow possible\n· nothing by itself\n· the only component that crosses the boundary — it turns a finding into a droppable packet",
@@ -394,8 +748,15 @@
           "relationships" : [ {
             "description" : "emits indicator records to",
             "destinationId" : "6",
-            "id" : "50",
-            "sourceId" : "17",
+            "id" : "52",
+            "sourceId" : "19",
+            "tags" : "Relationship",
+            "technology" : "OTLP/HTTP"
+          }, {
+            "description" : "Streams guard decisions and the success metric to",
+            "destinationId" : "8",
+            "id" : "62",
+            "sourceId" : "19",
             "tags" : "Relationship",
             "technology" : "OTLP/HTTP"
           } ],
@@ -404,30 +765,44 @@
         } ],
         "description" : "Telemetry and invariants: scores ingested content, and asserts no secret reaches a URL without a human in the window.",
         "documentation" : { },
-        "id" : "14",
+        "id" : "16",
         "name" : "Observability",
         "properties" : {
           "structurizr.dsl.identifier" : "obs"
         },
         "relationships" : [ {
           "description" : "Reads the read-then-post window from",
-          "destinationId" : "12",
-          "id" : "40",
-          "sourceId" : "14",
+          "destinationId" : "14",
+          "id" : "42",
+          "sourceId" : "16",
           "tags" : "Relationship"
         }, {
           "description" : "Emits the exfiltration indicator to",
           "destinationId" : "5",
-          "id" : "41",
-          "sourceId" : "14",
+          "id" : "43",
+          "sourceId" : "16",
           "tags" : "Relationship",
           "technology" : "OTLP/HTTP"
         }, {
           "description" : "emits indicator records to",
           "destinationId" : "6",
-          "id" : "51",
-          "linkedRelationshipId" : "50",
-          "sourceId" : "14",
+          "id" : "53",
+          "linkedRelationshipId" : "52",
+          "sourceId" : "16",
+          "technology" : "OTLP/HTTP"
+        }, {
+          "description" : "Scores ingested content with",
+          "destinationId" : "7",
+          "id" : "59",
+          "linkedRelationshipId" : "58",
+          "sourceId" : "16",
+          "technology" : "second model call"
+        }, {
+          "description" : "Streams guard decisions and the success metric to",
+          "destinationId" : "8",
+          "id" : "63",
+          "linkedRelationshipId" : "62",
+          "sourceId" : "16",
           "technology" : "OTLP/HTTP"
         } ],
         "tags" : "Element,Container",
@@ -435,52 +810,66 @@
       } ],
       "description" : "The DeepSeek Harness install: the agent loop, its event-sourced session, and the observability layer assembled from spare parts.",
       "documentation" : { },
-      "id" : "10",
+      "id" : "12",
       "name" : "dsh harness",
       "properties" : {
         "structurizr.dsl.identifier" : "dsh"
       },
       "relationships" : [ {
         "description" : "Posts the unfurl link to",
-        "destinationId" : "8",
-        "id" : "30",
-        "linkedRelationshipId" : "28",
-        "sourceId" : "10",
+        "destinationId" : "10",
+        "id" : "32",
+        "linkedRelationshipId" : "30",
+        "sourceId" : "12",
         "technology" : "no guard mounted"
       }, {
         "description" : "Posts the unfurl link to",
-        "destinationId" : "7",
-        "id" : "31",
-        "linkedRelationshipId" : "28",
-        "sourceId" : "10",
+        "destinationId" : "9",
+        "id" : "33",
+        "linkedRelationshipId" : "30",
+        "sourceId" : "12",
         "technology" : "no guard mounted"
       }, {
         "description" : "Returns a normal standup summary to",
         "destinationId" : "2",
-        "id" : "38",
-        "linkedRelationshipId" : "37",
-        "sourceId" : "10"
+        "id" : "40",
+        "linkedRelationshipId" : "39",
+        "sourceId" : "12"
       }, {
         "description" : "Emits the exfiltration indicator to",
         "destinationId" : "5",
-        "id" : "42",
-        "linkedRelationshipId" : "41",
-        "sourceId" : "10",
+        "id" : "44",
+        "linkedRelationshipId" : "43",
+        "sourceId" : "12",
         "technology" : "OTLP/HTTP"
       }, {
         "description" : "emits indicator records to",
         "destinationId" : "6",
-        "id" : "52",
-        "linkedRelationshipId" : "50",
-        "sourceId" : "10",
+        "id" : "54",
+        "linkedRelationshipId" : "52",
+        "sourceId" : "12",
         "technology" : "OTLP/HTTP"
+      }, {
+        "description" : "Requests completions from",
+        "destinationId" : "7",
+        "id" : "57",
+        "linkedRelationshipId" : "56",
+        "sourceId" : "12",
+        "technology" : "OpenAI-compatible"
+      }, {
+        "description" : "Publishes completed windows to",
+        "destinationId" : "8",
+        "id" : "61",
+        "linkedRelationshipId" : "60",
+        "sourceId" : "12",
+        "technology" : "reactive subscription"
       } ],
       "tags" : "Element,Software System"
     } ]
   },
   "name" : "No-Leak-MCP",
   "properties" : {
-    "structurizr.inspection.error" : "17",
+    "structurizr.inspection.error" : "18",
     "structurizr.inspection.info" : "0",
     "structurizr.inspection.ignore" : "0",
     "structurizr.inspection.warning" : "0"
@@ -496,18 +885,22 @@
         "rankSeparation" : 300,
         "vertices" : false
       },
-      "containerId" : "14",
+      "containerId" : "16",
       "description" : "Three jobs, and only one names the exfiltration: the scorer suspects, the invariant proves, the exporter tells someone who can act. This view has no order — for the sequence, open the ExfiltrationSignal trace, where the same six edges are numbered 1 to 6.",
       "elements" : [ {
         "id" : "6",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "12",
+        "id" : "7",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "13",
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
         "x" : 0,
         "y" : 0
       }, {
@@ -515,11 +908,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "16",
+        "id" : "17",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "17",
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
         "x" : 0,
         "y" : 0
       } ],
@@ -531,19 +928,25 @@
         "structurizr.tooltips" : "true"
       },
       "relationships" : [ {
-        "id" : "43"
-      }, {
-        "id" : "44"
-      }, {
         "id" : "45"
       }, {
         "id" : "46"
       }, {
+        "id" : "47"
+      }, {
         "id" : "48"
       }, {
-        "id" : "49"
-      }, {
         "id" : "50"
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "58"
+      }, {
+        "id" : "60"
+      }, {
+        "id" : "62"
       } ]
     } ],
     "configuration" : {
@@ -646,11 +1049,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "11",
+        "id" : "8",
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "12",
+        "id" : "9",
         "x" : 0,
         "y" : 0
       }, {
@@ -659,6 +1062,14 @@
         "y" : 0
       }, {
         "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
         "x" : 0,
         "y" : 0
       } ],
@@ -670,33 +1081,159 @@
         "structurizr.tooltips" : "true"
       },
       "relationships" : [ {
-        "id" : "21"
-      }, {
-        "id" : "25"
+        "id" : "23"
       }, {
         "id" : "27"
       }, {
         "id" : "29"
       }, {
-        "id" : "32"
+        "id" : "31"
       }, {
-        "id" : "37"
+        "id" : "34"
       }, {
         "id" : "39"
       }, {
-        "id" : "40"
-      }, {
         "id" : "41"
       }, {
-        "id" : "45"
+        "id" : "42"
+      }, {
+        "id" : "43"
       }, {
         "id" : "47"
       }, {
-        "id" : "51"
+        "id" : "49"
       }, {
         "id" : "53"
+      }, {
+        "id" : "55"
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "59"
+      }, {
+        "id" : "60"
+      }, {
+        "id" : "63"
       } ],
-      "softwareSystemId" : "10"
+      "softwareSystemId" : "12"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "applied" : false,
+        "edgeSeparation" : 0,
+        "implementation" : "Graphviz",
+        "nodeSeparation" : 300,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 300,
+        "vertices" : false
+      },
+      "description" : "WHERE each box runs. The three sponsor planes appear once each, as nodes: Nebius serves inference, Render carries what must outlive a laptop, Convex holds the realtime state. The victim's harness and its session log never leave Engineer B's machine.",
+      "elements" : [ {
+        "id" : "64",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "65",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "66",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "67",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "70",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "73",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "76",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "77",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "78",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "80",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "81",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "82",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "83",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "86",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "87",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "90",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "91",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "Live",
+      "key" : "Deployment",
+      "name" : "Deployment View: dsh harness - Live",
+      "order" : 6,
+      "properties" : {
+        "structurizr.tooltips" : "true"
+      },
+      "relationships" : [ {
+        "id" : "68"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "71"
+      }, {
+        "id" : "72"
+      }, {
+        "id" : "74"
+      }, {
+        "id" : "75"
+      }, {
+        "id" : "79"
+      }, {
+        "id" : "84"
+      }, {
+        "id" : "85"
+      }, {
+        "id" : "88"
+      }, {
+        "id" : "89"
+      }, {
+        "id" : "92"
+      }, {
+        "id" : "93"
+      }, {
+        "id" : "94"
+      } ],
+      "softwareSystemId" : "12"
     } ],
     "dynamicViews" : [ {
       "automaticLayout" : {
@@ -709,7 +1246,7 @@
         "vertices" : false
       },
       "description" : "The silent leak, bundle off: nothing renders in the channel and the theft has already happened.",
-      "elementId" : "10",
+      "elementId" : "12",
       "elements" : [ {
         "id" : "1",
         "x" : 0,
@@ -727,11 +1264,7 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "8",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "9",
+        "id" : "10",
         "x" : 0,
         "y" : 0
       }, {
@@ -739,7 +1272,11 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "12",
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
         "x" : 0,
         "y" : 0
       } ],
@@ -752,57 +1289,57 @@
       },
       "relationships" : [ {
         "description" : "Sets an open-ended goal for",
-        "id" : "18",
+        "id" : "20",
         "order" : "1",
         "response" : false
       }, {
         "description" : "Posts hidden instructions to",
-        "id" : "19",
+        "id" : "21",
         "order" : "2",
         "response" : false
       }, {
         "description" : "Asks for a standup summary from",
-        "id" : "21",
+        "id" : "23",
         "order" : "3",
         "response" : false
       }, {
         "description" : "Returns the poisoned channel to",
-        "id" : "23",
+        "id" : "25",
         "order" : "4",
         "response" : false
       }, {
         "description" : "Appends the poisoned result to",
-        "id" : "27",
+        "id" : "29",
         "order" : "5",
         "response" : false
       }, {
         "description" : "Posts the unfurl link to",
-        "id" : "28",
+        "id" : "30",
         "order" : "6",
         "response" : false
       }, {
         "description" : "Appends the post call and its result to",
-        "id" : "32",
+        "id" : "34",
         "order" : "7",
         "response" : false
       }, {
         "description" : "Queues the link preview for",
-        "id" : "33",
+        "id" : "35",
         "order" : "8",
         "response" : false
       }, {
         "description" : "Fetches the url server-side from",
-        "id" : "34",
+        "id" : "36",
         "order" : "9",
         "response" : false
       }, {
         "description" : "Delivers the stolen credential to",
-        "id" : "36",
+        "id" : "38",
         "order" : "10",
         "response" : false
       }, {
         "description" : "Returns a normal standup summary to",
-        "id" : "37",
+        "id" : "39",
         "order" : "11",
         "response" : false
       } ]
@@ -817,7 +1354,7 @@
         "vertices" : false
       },
       "description" : "START AT 1. From a durable record to an indicator a firewall can act on — and step 2 is the event to instrument: the invariant's read-then-post window.",
-      "elementId" : "14",
+      "elementId" : "16",
       "elements" : [ {
         "id" : "5",
         "x" : 0,
@@ -827,19 +1364,19 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "12",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "15",
-        "x" : 0,
-        "y" : 0
-      }, {
-        "id" : "16",
+        "id" : "14",
         "x" : 0,
         "y" : 0
       }, {
         "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
         "x" : 0,
         "y" : 0
       } ],
@@ -852,32 +1389,32 @@
       },
       "relationships" : [ {
         "description" : "hands redacted records to",
-        "id" : "43",
+        "id" : "45",
         "order" : "1",
         "response" : false
       }, {
         "description" : "reads read-then-post windows from",
-        "id" : "44",
+        "id" : "46",
         "order" : "2",
         "response" : false
       }, {
         "description" : "reports invariant failures to",
-        "id" : "48",
+        "id" : "50",
         "order" : "3",
         "response" : false
       }, {
         "description" : "contributes injection scores to",
-        "id" : "49",
+        "id" : "51",
         "order" : "4",
         "response" : false
       }, {
         "description" : "emits indicator records to",
-        "id" : "50",
+        "id" : "52",
         "order" : "5",
         "response" : false
       }, {
         "description" : "routes hosts and canary hashes to",
-        "id" : "53",
+        "id" : "55",
         "order" : "6",
         "response" : false
       } ]
@@ -910,7 +1447,15 @@
         "x" : 0,
         "y" : 0
       }, {
-        "id" : "10",
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
         "x" : 0,
         "y" : 0
       } ],
@@ -918,22 +1463,29 @@
       "key" : "SystemContext",
       "name" : "System Context View: dsh harness",
       "order" : 1,
+      "properties" : {
+        "structurizr.tooltips" : "true"
+      },
       "relationships" : [ {
-        "id" : "22"
+        "id" : "24"
       }, {
-        "id" : "26"
+        "id" : "28"
       }, {
-        "id" : "31"
+        "id" : "33"
       }, {
-        "id" : "38"
+        "id" : "40"
       }, {
-        "id" : "42"
+        "id" : "44"
       }, {
-        "id" : "52"
+        "id" : "54"
       }, {
-        "id" : "53"
+        "id" : "55"
+      }, {
+        "id" : "57"
+      }, {
+        "id" : "61"
       } ],
-      "softwareSystemId" : "10"
+      "softwareSystemId" : "12"
     } ]
   }
 }

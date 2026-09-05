@@ -44,6 +44,29 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
             tags "Existing System"
         }
 
+        /* THE INFERENCE PLANE, AND IT IS BOTH ENDS OF THE EXPERIMENT. The same provider serves the
+           victim model and the scorer that judges what the victim ingested, which is what makes the
+           headline metric a comparison rather than an anecdote: one plane, one config, bundle off
+           then on. */
+        nebius = softwareSystem "Nebius inference" "proposed — hover for details. Serves the victim model and the injection scorer from one plane, so attack-success is measured against a fixed inference substrate." {
+            tags "Proposal"
+            !adrs adrs-nebius
+            perspectives {
+                "Rationale" "Gap in Deepseek Harness\n· the harness names no inference provider; reliability of the victim run is whatever the operator wired\n· a scorer needs a second model call and there is no seat that owns it\n\nvs Claude Code\n· Claude Code is bound to one vendor, so the question does not arise for it\n· here the finding is that a capable-but-not-hardened model obeys, which only means something on a plane you can pin\n\nNow possible\n· attack-success-rate becomes reproducible: same substrate, bundle off then on\n· the scorer stops competing with the victim for a different provider's quota"
+            }
+        }
+
+        /* THE REALTIME PLANE. Not the harness's business and deliberately outside it: the metric has
+           to be watchable by several people at once while the run is happening, which is a property
+           of the store rather than of the agent. */
+        convex = softwareSystem "Convex realtime" "proposed — hover for details. Holds the live event stream and the attack-success metric, and pushes both to every viewer at once." {
+            tags "Proposal"
+            !adrs adrs-convex
+            perspectives {
+                "Rationale" "Gap in Deepseek Harness\n· the session log is durable and strictly local; nothing publishes it while a run is in flight\n· a second watcher can only tail a file, and sees a different moment from the first\n\nvs Claude Code\n· Claude Code ships OTel metrics and logs to a collector, which is one-way and per-install\n· neither harness has a shared, subscribable view of one run\n\nNow possible\n· two people watch attack-success flip 1 to 0 in the same instant, which is the demo\n· the reactive window index pushes here instead of a poller asking"
+            }
+        }
+
         slackWorkspace = softwareSystem "Slack" "Channels and the MCP server the agent reads, and the link-unfurl service that fetches previews server-side." {
             slack = container "Slack workspace" "Channels and MCP server: where the poisoned message is planted and the unfurl link is posted." "SaaS"
             unfurl = container "Link unfurl service" "Builds the link preview by fetching the URL from Slack's own servers, not the victim's host." "SaaS"
@@ -161,10 +184,57 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
         scorer -> exporter "contributes injection scores to"
         exporter -> collector "emits indicator records to" "OTLP/HTTP"
         collector -> controls "routes hosts and canary hashes to"
+
+        /* THE TWO PROPOSED PLANES, wired where they actually touch the chain. The victim and the
+           scorer share one provider; the index and the exporter both publish, which is why the
+           dashboard can show the guard's decision beside the window that triggered it. */
+        run -> nebius "Requests completions from" "OpenAI-compatible"
+        scorer -> nebius "Scores ingested content with" "second model call"
+        windows -> convex "Publishes completed windows to" "reactive subscription"
+        exporter -> convex "Streams guard decisions and the success metric to" "OTLP/HTTP"
+
+        /* WHERE IT ALL RUNS, and Render is HERE rather than beside the boxes above.
+           The proposal gives Render four jobs — attacker listener, OTLP collector, detection worker,
+           dashboard host — and three of those are systems this model ALREADY declares. Adding a
+           "Render" box next to them would say the hosting is a peer of the things it hosts, which is
+           chapter 11's own worked mistake in a different costume (Figure 11-19, the message bus drawn
+           as a container). Chapter 8 has the right place for it: a deployment view, which this model
+           did not have. The static structure says WHAT talks to what; this says WHERE each of those
+           runs, and Render appears once, as a node. */
+        deploymentEnvironment "Live" {
+            deploymentNode "Engineer B laptop" "The victim's own machine. The harness and its session log never leave it." "macOS" {
+                deploymentNode "dsh 0.1.1-rc.2" "The harness install." "Node" {
+                    containerInstance run
+                    containerInstance store
+                    containerInstance obs
+                    containerInstance windows
+                }
+            }
+            deploymentNode "Render" "The delivery plane: everything that must outlive a laptop lid closing, and recover from a dead step by rebuilding from the durable session log." "PaaS" {
+                deploymentNode "Detection worker" "Re-subscribes and rebuilds its state from the durable log rather than restarting from zero." "background worker" {
+                    softwareSystemInstance collector
+                }
+                deploymentNode "Attacker listener host" "Engineer A's drop. Outside the victim's host by construction — the whole point is that it is reachable from Slack's servers." "web service" {
+                    softwareSystemInstance listener
+                }
+            }
+            deploymentNode "Nebius" "The inference plane, shared by the victim model and the scorer." "managed inference" {
+                softwareSystemInstance nebius
+            }
+            deploymentNode "Convex" "The realtime plane. Hosted, and the dashboard subscribes to it rather than polling." "managed reactive database" {
+                softwareSystemInstance convex
+            }
+            deploymentNode "Slack" "Not ours, and the unfurl fetch originates here rather than on the victim's host — which is the whole CVE." "SaaS" {
+                softwareSystemInstance slackWorkspace
+            }
+        }
     }
 
     views {
         systemContext dsh "SystemContext" {
+            properties {
+                "structurizr.tooltips" "true"
+            }
             include *
             autoLayout lr 400 400
             description "The harness in its world: who asks it for work, what it reads, and who is listening."
@@ -235,14 +305,20 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
             description "START AT 1. From a durable record to an indicator a firewall can act on — and step 2 is the event to instrument: the invariant's read-then-post window."
         }
 
+        deployment dsh "Live" "Deployment" {
+            include *
+            autoLayout lr
+            properties {
+                "structurizr.tooltips" "true"
+            }
+            description "WHERE each box runs. The three sponsor planes appear once each, as nodes: Nebius serves inference, Render carries what must outlive a laptop, Convex holds the realtime state. The victim's harness and its session log never leave Engineer B's machine."
+        }
+
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
-           Edit the theme, not this block: the check refuses any drift between them. */
-        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
-           Edit the theme, not this block: the check refuses any drift between them. */
-        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
-           Edit the theme, not this block: the check refuses any drift between them. */
-        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
-           Edit the theme, not this block: the check refuses any drift between them. */
+           Edit the theme, not this block: the check refuses any drift between them.
+           THE HEADER WAS REPEATED FOUR TIMES — one per --write run, because the generator prepended
+           its comment and matched only the block below it. Collapsed to one; the styles are
+           unchanged. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
            Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.

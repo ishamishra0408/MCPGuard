@@ -10,7 +10,8 @@
     "line": "a solid line is a call that blocks; a dashed line is a message that does not. The book offers both conventions in ch10 and requires neither, so this file is where the choice is made.",
     "frame": "a deployment node is where things RUN, not a thing we build, so it is drawn as a frame: no fill, a light stroke. It makes no hue claim because ownership is not what it says.",
     "delivery": "the STROKE says whether we are proposing it, and the DESCRIPTION carries the word. Neon pink is a Proposal — a component the harness has no seat for; amber is Modified — a rule in an extension point that already ships empty. Hue is NOT used for this, because ADR 0002 spent it on ownership. Measured on the canvas: pink 5.00:1, amber 9.06:1, and their greyscale lightness is 0.278 against 0.545, so the two stay apart with the colour removed.",
-    "accounting": "A style row that no view here draws must say ON THE ROW who it is for. The palette is seeded outward, so a row can exist for somebody else’s model; what is refused is a row nobody can account for. The field is `for`, which is the word machinery.json already uses for the same question."
+    "accounting": "A style row that no view here draws must say ON THE ROW who it is for. The palette is seeded outward, so a row can exist for somebody else’s model; what is refused is a row nobody can account for. The field is `for`, which is the word machinery.json already uses for the same question.",
+    "instance": "an instance makes NO hue claim, for the same reason a frame does not: it says WHERE something runs, not whether we own it. Measured 2026-09-05 — styling \"Software System Instance\" violet would have painted the attacker listener, the OTel collector, the network controls and the attacker agent as OURS, and \"Container Instance\" violet would have claimed Slack's own containers. The renderer already resolves an instance from the thing it instances, so the row exists to EXPLAIN the tag on the key and nothing more."
   },
   "canvas": "#1F2226",
   "ramp": [
@@ -100,15 +101,11 @@
     },
     {
       "tag": "Container Instance",
-      "background": "#5a5fa6",
-      "stroke": "#b9bdf5",
-      "for": "a deployment view — an instance looks like the container it instances, so the palette means one thing across every view"
+      "for": "a deployment view — the tag is explained on the key and makes NO hue claim, because an instance is a placement and the renderer resolves its appearance from the element it instances"
     },
     {
       "tag": "Software System Instance",
-      "background": "#3f4383",
-      "stroke": "#a5a9f0",
-      "for": "a deployment view — an instance looks like the system it instances"
+      "for": "a deployment view — the tag is explained on the key and makes NO hue claim, because an instance is a placement and the renderer resolves its appearance from the element it instances"
     }
   ],
   "relationships": [
@@ -132,5 +129,20 @@
   "deliveryLabels": {
     "Proposal": "proposed — hover for details",
     "Modified": "modified — hover for details"
-  }
+  },
+  "hues": {
+    "#3f4383": "ours",
+    "#5a5fa6": "ours",
+    "#8b92ce": "ours",
+    "#2b3a33": "not ours",
+    "#1f2226": "no claim"
+  },
+  "_hues_why": "What each fill CLAIMS, not what it looks like. checks/palette-claim.mjs refuses a fill that is not here, and refuses an ownership fill on a row listed in noClaim.",
+  "noClaim": [
+    "Deployment Node",
+    "Infrastructure Node",
+    "Container Instance",
+    "Software System Instance"
+  ],
+  "_noClaim_why": "Rows that say WHERE something runs rather than whether we own it. A frame and an instance are both placements; the renderer resolves an instance from the element it instances, so a hue here would overwrite that answer with a false one."
 }

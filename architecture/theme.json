@@ -97,6 +97,18 @@
       "stroke": "#ff2fd0",
       "strokeWidth": 6,
       "for": "any repo marking a component the system it extends has no seat for"
+    },
+    {
+      "tag": "Container Instance",
+      "background": "#5a5fa6",
+      "stroke": "#b9bdf5",
+      "for": "a deployment view — an instance looks like the container it instances, so the palette means one thing across every view"
+    },
+    {
+      "tag": "Software System Instance",
+      "background": "#3f4383",
+      "stroke": "#a5a9f0",
+      "for": "a deployment view — an instance looks like the system it instances"
     }
   ],
   "relationships": [

@@ -361,6 +361,10 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
            Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
            Edit the theme, not this block: the check refuses any drift between them. */
+        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
+           Edit the theme, not this block: the check refuses any drift between them. */
+        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
+           Edit the theme, not this block: the check refuses any drift between them. */
         styles {
             element "Element" {
                 color #ffffff
@@ -405,8 +409,8 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
                 color #ffffff
             }
             element "Infrastructure Node" {
-                background #1F2226
-                stroke #9aa4b2
+                background #5a5fa6
+                stroke #b9bdf5
                 color #ffffff
             }
             element "Modified" {

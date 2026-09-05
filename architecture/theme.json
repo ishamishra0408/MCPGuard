@@ -8,7 +8,7 @@
     "muted green": "not ours: a person, or a system that already exists and that we call rather than build. Outside the ramp, and darker than all of it, so it stays distinct with the colour removed.",
     "shape": "a store is a cylinder, a queue or topic is a pipe, and a person is a person. Shape carries what colour must not be asked to carry twice.",
     "line": "a solid line is a call that blocks; a dashed line is a message that does not. The book offers both conventions in ch10 and requires neither, so this file is where the choice is made.",
-    "frame": "a deployment node is where things RUN, not a thing we build, so it is drawn as a frame: no fill, a light stroke. It makes no hue claim because ownership is not what it says.",
+    "frame": "a DEPLOYMENT NODE is where things run and it CONTAINS them, so it is drawn as a frame: canvas fill, a light stroke, no hue claim, because ownership is not what a boundary says. An INFRASTRUCTURE NODE is not a frame — it holds nothing. Measured 2026-09-05: it had been given the frame treatment by analogy with the line above, and the detection worker then rendered as a 450x300 empty-looking box the operator picked out by hand. A leaf takes the element treatment.",
     "delivery": "the STROKE says whether we are proposing it, and the DESCRIPTION carries the word. Neon pink is a Proposal — a component the harness has no seat for; amber is Modified — a rule in an extension point that already ships empty. Hue is NOT used for this, because ADR 0002 spent it on ownership. Measured on the canvas: pink 5.00:1, amber 9.06:1, and their greyscale lightness is 0.278 against 0.545, so the two stay apart with the colour removed.",
     "accounting": "A style row that no view here draws must say ON THE ROW who it is for. The palette is seeded outward, so a row can exist for somebody else’s model; what is refused is a row nobody can account for. The field is `for`, which is the word machinery.json already uses for the same question.",
     "instance": "an instance makes NO hue claim, for the same reason a frame does not: it says WHERE something runs, not whether we own it. Measured 2026-09-05 — styling \"Software System Instance\" violet would have painted the attacker listener, the OTel collector, the network controls and the attacker agent as OURS, and \"Container Instance\" violet would have claimed Slack's own containers. The renderer already resolves an instance from the thing it instances, so the row exists to EXPLAIN the tag on the key and nothing more."
@@ -83,9 +83,10 @@
     },
     {
       "tag": "Infrastructure Node",
-      "background": "#1F2226",
-      "stroke": "#9aa4b2",
-      "color": "#ffffff"
+      "background": "#5a5fa6",
+      "stroke": "#b9bdf5",
+      "color": "#ffffff",
+      "for": "a thing that RUNS and holds nothing — a worker, a load balancer. It is a leaf, not a boundary, so it takes the element treatment and makes an ownership claim like any other element; a node we do not own says so by carrying Existing System."
     },
     {
       "tag": "Modified",
@@ -140,7 +141,6 @@
   "_hues_why": "What each fill CLAIMS, not what it looks like. checks/palette-claim.mjs refuses a fill that is not here, and refuses an ownership fill on a row listed in noClaim.",
   "noClaim": [
     "Deployment Node",
-    "Infrastructure Node",
     "Container Instance",
     "Software System Instance"
   ],

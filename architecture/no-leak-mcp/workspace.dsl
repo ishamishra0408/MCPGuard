@@ -77,6 +77,19 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
                 perspectives {
                     "Rationale" "Gap in Deepseek Harness\n· the guard slot ships and nothing is mounted in it\n\nvs Claude Code\n· PreToolUse hooks and permission prompts gate the CALL\n· neither gates the VALUE carried inside it\n\nNow possible\n· refuse at assembly, not at fetch — while the URL is still an argument\n· nothing leaves, so there is nothing to detect later"
                 }
+
+                /* THE KILL POINT, AND IT WAS PROSE UNTIL NOW. The proposal names three controls and
+                   the model drew two of them: the scorer and the invariant, both in Observability.
+                   The one that actually STOPS the theft lived only in this container's description
+                   and in the sentence above. A picture of a defence that omits its enforcement point
+                   shows the watching and not the stopping. */
+                guard = component "Payload-compose guard" "proposed — hover for details. Refuses a tool call whose outbound argument carries a tagged secret, while the URL is still an argument." "dsh-tools · ctx.tools.guard" {
+                    tags "Proposal"
+                    !adrs adrs-guard
+                    perspectives {
+                        "Rationale" "Gap in Deepseek Harness\n· ctx.tools.guard ships as an empty seam and nothing is mounted in it\n· the harness can refuse a CALL and has no opinion on the VALUE inside it\n\nvs Claude Code\n· PreToolUse hooks and permission prompts gate which tool runs\n· neither inspects the argument, so a permitted post carrying a secret passes\n\nNow possible\n· one denial covers the unfurl, image and direct-fetch vectors identically\n· it holds whether the model refuses, obeys, or never judged the call at all"
+                    }
+                }
             }
             store = container "Session store" "Event-sourced: every step of the chain is already written down here before anyone asks." "dsh · session · jsonl · query" {
                 tags "Data Store"
@@ -188,6 +201,11 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
         /* THE TWO PROPOSED PLANES, wired where they actually touch the chain. The victim and the
            scorer share one provider; the index and the exporter both publish, which is why the
            dashboard can show the guard's decision beside the window that triggered it. */
+        /* THE GUARD'S TWO EDGES. It needs the tagged-secret set to key on, and a denial has to reach
+           the same exporter the other two controls report through — otherwise the one control that
+           stops something is the only one nobody can observe. */
+        store -> guard "Supplies the tagged-secret set to" "durable event"
+        guard -> exporter "Reports a refused assembly to"
         run -> nebius "Requests completions from" "OpenAI-compatible"
         scorer -> nebius "Scores ingested content with" "second model call"
         windows -> convex "Publishes completed windows to" "reactive subscription"
@@ -305,6 +323,15 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
             description "The silent leak, bundle off: nothing renders in the channel and the theft has already happened."
         }
 
+        component run "Guard" {
+            include *
+            autoLayout lr
+            properties {
+                "structurizr.tooltips" "true"
+            }
+            description "The kill point, on its own plate. One component, because there is one place a secret can be refused while it is still an argument — and the whole defence rests on it."
+        }
+
         component obs "Observability" {
             properties {
                 "structurizr.tooltips" "true"
@@ -353,6 +380,8 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
            THE HEADER WAS REPEATED FOUR TIMES — one per --write run, because the generator prepended
            its comment and matched only the block below it. Collapsed to one; the styles are
            unchanged. */
+        /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
+           Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.
            Edit the theme, not this block: the check refuses any drift between them. */
         /* GENERATED FROM architecture/theme.json by checks/diagram-contrast.mjs --write.

@@ -989,6 +989,18 @@
         const res = await fetch(project + '/workspace.json');
         if (!res.ok) { unevaluable('The export for ' + project + ' answered ' + res.status + '.'); return; }
         ws = await res.json();
+        /* THE FRAME'S URL CARRIES THE MODEL'S OWN AGE, and without it a re-export is invisible.
+           MEASURED 2026-09-05: the operator re-exported, reloaded, and still got the previous
+           bundle. `python -m http.server` sends Last-Modified and NO ETag and NO Cache-Control, so
+           the browser caches site/workspace.js heuristically; and because this page navigates the
+           frame by changing its HASH, the document is never re-fetched at all. Reloading the
+           wrapper reloads the wrapper — the frame's script came from cache, so the rail (built from
+           the json just fetched) offered a view the running bundle had never heard of, and the
+           plate went blank. Fresh model, stale page, and nothing said so.
+           The token is the json's own Last-Modified: same export, same URL, cache still works;
+           new export, new URL, and the frame cannot serve yesterday's diagram. */
+        const stamp = res.headers.get('last-modified') || ws.lastModifiedDate || '';
+        if (stamp) SITE += '?v=' + encodeURIComponent(String(stamp).replace(/[^0-9A-Za-z]+/g, ''));
       } catch (e) {
         /* THE FILE PROTOCOL IS THE COMMON CASE OF THIS, and it is a fact about how the page was
            opened, not about the model. Saying "no levels found" here would be a lie. */

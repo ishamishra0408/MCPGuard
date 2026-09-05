@@ -1,0 +1,10 @@
+{
+  "generated": "checks/diagram-contrast.mjs --index",
+  "projects": [
+    {
+      "dir": "no-leak-mcp",
+      "name": "No-Leak-MCP",
+      "description": "Blocks silent credential exfiltration."
+    }
+  ]
+}

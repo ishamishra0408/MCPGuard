@@ -103,11 +103,32 @@ durable state, not restart-from-zero.
 - Beeceptor/webhook.site capture of `GET /sync/<base64>` → decodes to the full keyring.
 - dsh trajectory: `slack_get_channel_history` → read file → `cat | base64` → `slack_post_message`.
 - `attacker_receiver.py` — the attacker's harvester (polls the drop, decodes).
-- Repo: two C4 dynamic diagrams (component + container level) of the exfil chain and the guard.
+- **The model, as code**: `architecture/no-leak-mcp/workspace.dsl` — one Structurizr DSL that yields
+  **six views**: SystemContext, Containers, the Observability component view, two dynamic traces
+  (KillChain, ExfiltrationSignal) and a Deployment view. Exported, not drawn: the pictures cannot
+  disagree with the model because there is only one source.
+- **The Deployment view carries the sponsor architecture**, each plane appearing once as a node:
+  Nebius serves inference to the victim and the scorer, Render carries what must outlive a laptop
+  (OTLP collector, detection worker, attacker listener), Convex holds the realtime state. It also
+  states the boundary the threat model rests on — the harness and its session log never leave
+  Engineer B's machine, and the unfurl fetch happens on **Slack's** servers, which is why no egress
+  control on that laptop can see it.
+- **Five ADRs beside the boxes they govern**, each reachable from its element: the compose guard as a
+  companion rather than a patch, filling the empty telemetry waterfall, pushing the read-then-post
+  window instead of polling it, one inference plane for victim and scorer, and the realtime metric
+  living outside the harness.
+- **Every box marked `Proposal` or `Modified` is ours**, in stroke and in words, so a reader can see
+  at a glance what DSH ships and what this project adds.
+- **The diagrams are checked, not just drawn**: eight controls run against this model and all eight
+  are green — the notation is explained on the key, no queue is drawn as an application, no
+  asynchronous hop is drawn solid, every proposal is governed by a decision, every element carries a
+  hover rationale, the palette claims no false ownership, and the page served matches the model the
+  checks judged.
 
 ---
 
-*Status: attack fully proven on real infrastructure; defense (the three-control guard) is the remaining
-build. This document is the handoff brief for the build session.*
+*Status: attack fully proven on real infrastructure. The ARCHITECTURE is now modelled as code and
+checked — six views, five ADRs, eight controls green. The defense itself (the three-control guard)
+is the remaining build. This document is the handoff brief for the build session.*
 
 *Analysis, reproduction, and diagrams produced with Claude Code.*

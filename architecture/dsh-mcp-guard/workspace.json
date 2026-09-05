@@ -13,7 +13,7 @@
           "id" : "66",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "73c0eb28-7d54-483e-bc5e-d29153e1c1a5"
+            "structurizr.dsl.identifier" : "1da415ca-1e08-4731-8fb6-b34e063ac653"
           },
           "relationships" : [ {
             "description" : "Appends the poisoned result to",
@@ -52,7 +52,7 @@
           "id" : "67",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "82947e4d-8bad-40c1-a345-e12583476bd1"
+            "structurizr.dsl.identifier" : "792d15d1-3a09-4570-85f4-411be5ea8cf9"
           },
           "relationships" : [ {
             "description" : "Hands the redacted record to",
@@ -77,7 +77,7 @@
           "id" : "70",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "0f0775a5-7711-48ca-9e81-252b3a4801f3"
+            "structurizr.dsl.identifier" : "2785e67e-03a9-4758-955a-2182859ac62f"
           },
           "relationships" : [ {
             "description" : "Reads the read-then-post window from",
@@ -115,7 +115,7 @@
           "id" : "73",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "b4260f0c-f825-4bf4-89d6-9b413447bc11"
+            "structurizr.dsl.identifier" : "8195ac2c-2897-4305-9a4d-9e3132e1d9d1"
           },
           "relationships" : [ {
             "description" : "Pushes a completed read-then-post window to",
@@ -140,7 +140,7 @@
         "instances" : "1",
         "name" : "dsh 0.1.1-rc.2",
         "properties" : {
-          "structurizr.dsl.identifier" : "47559a52-918b-4177-aded-765cc2849bdc"
+          "structurizr.dsl.identifier" : "3601accf-0f54-49b1-958a-6e4551f60fcb"
         },
         "tags" : "Element,Deployment Node",
         "technology" : "Node"
@@ -151,7 +151,7 @@
       "instances" : "1",
       "name" : "Engineer B laptop",
       "properties" : {
-        "structurizr.dsl.identifier" : "5ebb36f2-1f60-4235-b799-b65208d039db"
+        "structurizr.dsl.identifier" : "120e7182-f57a-4fc9-881e-93347f14a125"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "macOS"
@@ -163,7 +163,7 @@
         "instances" : "1",
         "name" : "Detection worker",
         "properties" : {
-          "structurizr.dsl.identifier" : "2d56772f-dfc8-4a8b-83a9-a3134f108003"
+          "structurizr.dsl.identifier" : "9b74cd35-a242-4acb-96f0-88db860f8160"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -171,7 +171,7 @@
           "id" : "78",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "76a57aa8-c79e-4243-93bb-9f44e63dcdb3"
+            "structurizr.dsl.identifier" : "ceff84f1-0979-40b8-bb8f-66e39d1dffe6"
           },
           "softwareSystemId" : "6",
           "tags" : "Software System Instance"
@@ -185,7 +185,7 @@
         "instances" : "1",
         "name" : "Attacker listener host",
         "properties" : {
-          "structurizr.dsl.identifier" : "70a443f7-5bb9-4dd2-b0df-cdeb5a08cfc3"
+          "structurizr.dsl.identifier" : "6dfb8f50-8bbc-4802-baec-39a5be9e2b42"
         },
         "softwareSystemInstances" : [ {
           "deploymentGroups" : [ "Default" ],
@@ -193,7 +193,7 @@
           "id" : "81",
           "instanceId" : 1,
           "properties" : {
-            "structurizr.dsl.identifier" : "804aa2d1-a839-4de8-bb4b-ee8e29afc8d0"
+            "structurizr.dsl.identifier" : "15f8dec2-e059-4742-9bd1-fcd18f1151d9"
           },
           "softwareSystemId" : "4",
           "tags" : "Software System Instance"
@@ -207,7 +207,7 @@
       "instances" : "1",
       "name" : "Render",
       "properties" : {
-        "structurizr.dsl.identifier" : "eb5bdd12-20b4-485b-a760-0478b85fbef2"
+        "structurizr.dsl.identifier" : "5165323b-c01b-498d-a689-396ac4a75256"
       },
       "tags" : "Element,Deployment Node",
       "technology" : "PaaS"
@@ -218,7 +218,7 @@
       "instances" : "1",
       "name" : "Nebius",
       "properties" : {
-        "structurizr.dsl.identifier" : "6ba6210a-3cd8-4d97-9c2c-54ce42c759bb"
+        "structurizr.dsl.identifier" : "d70c8f6b-d5c7-4968-8551-72f0d29aff09"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -226,7 +226,7 @@
         "id" : "83",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "13be3faf-97ee-45df-b1f6-d6d6853c932e"
+          "structurizr.dsl.identifier" : "e6fe2ed1-647f-439b-8dd9-b8ec34e10f4a"
         },
         "softwareSystemId" : "7",
         "tags" : "Software System Instance"
@@ -240,7 +240,7 @@
       "instances" : "1",
       "name" : "Convex",
       "properties" : {
-        "structurizr.dsl.identifier" : "90bc1746-dbf2-40d1-bf99-cf1b6fdf5fdb"
+        "structurizr.dsl.identifier" : "1095e7ab-ecb0-4967-8668-d301d9dceced"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -248,7 +248,7 @@
         "id" : "87",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "62516f4e-5143-4146-aec3-d91bb96df83e"
+          "structurizr.dsl.identifier" : "50d45676-37d8-4248-a75a-0d465481bcef"
         },
         "softwareSystemId" : "8",
         "tags" : "Software System Instance"
@@ -262,7 +262,7 @@
       "instances" : "1",
       "name" : "Slack",
       "properties" : {
-        "structurizr.dsl.identifier" : "734629c4-c24c-4bcb-8615-1e41d1d25ca2"
+        "structurizr.dsl.identifier" : "71a9a6d5-0eb5-4530-9326-994fdd0cf922"
       },
       "softwareSystemInstances" : [ {
         "deploymentGroups" : [ "Default" ],
@@ -270,7 +270,7 @@
         "id" : "91",
         "instanceId" : 1,
         "properties" : {
-          "structurizr.dsl.identifier" : "01956fcc-4350-4b4c-ac24-06c344c67ccf"
+          "structurizr.dsl.identifier" : "7adf5642-e6a6-46ba-bd38-a087868facf7"
         },
         "relationships" : [ {
           "description" : "Returns the poisoned channel to",
@@ -658,7 +658,7 @@
           "technology" : "reactive subscription"
         } ],
         "tags" : "Element,Container,Proposal",
-        "technology" : "Convex · reactive query"
+        "technology" : "reactive index · pushes on write"
       }, {
         "components" : [ {
           "description" : "modified — hover for details. Suspects: scores ingested text for instruction patterns.",

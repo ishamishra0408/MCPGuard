@@ -110,7 +110,7 @@ workspace "No-Leak-MCP" "Blocks silent credential exfiltration." {
                that closes it. It sits BESIDE the store rather than replacing it: the store stays the
                record, the index is a derived projection, and losing the index degrades the invariant
                to the poll rather than losing evidence. */
-            windows = container "Reactive window index" "proposed — hover for details. Keeps the open read-then-post windows and pushes one the moment its second half lands." "Convex · reactive query" {
+            windows = container "Reactive window index" "proposed — hover for details. Keeps the open read-then-post windows and pushes one the moment its second half lands." "reactive index · pushes on write" {
                 tags "Proposal"
                 !adrs adrs-windows
                 perspectives {

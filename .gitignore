@@ -1,2 +1,7 @@
 node_modules/
 .DS_Store
+
+# Decoy keyring — canary values only, kept local (not pushed) so GitHub's
+# secret scanner doesn't flag the token-shaped patterns.
+agent-credentials.env
+.env

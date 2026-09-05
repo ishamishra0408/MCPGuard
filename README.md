@@ -1,4 +1,4 @@
-# mcp-guard — Silent Egress Observability & Governance for the MCP Slack Surface
+# No-Leak-MCP — Silent Egress Observability & Governance for the MCP Slack Surface
 
 Blue-team observability + governance layer that detects and blocks a **silent
 credential leak** through an AI agent's Slack MCP surface — assembled entirely
